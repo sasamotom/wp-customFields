@@ -1,0 +1,10 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.footer {
+  padding: 10px 0;
+  &Copy {
+    font-size: 1rem;
+    text-align: center;
+  }
+}

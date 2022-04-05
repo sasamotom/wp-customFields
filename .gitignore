@@ -1,0 +1,14 @@
+node_modules/
+htdocs/
+yarn-error.log
+.DS_Store
+
+# gitkeep
+!/**/.gitkeep
+
+# WordPress
+/web/wp/*
+!/web/wp/wp-content/
+/web/wp/wp-content/*
+!/web/wp/wp-content/uploads/
+!/web/wp/wp-content/plugins/

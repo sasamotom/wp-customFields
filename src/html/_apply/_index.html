@@ -1,0 +1,82 @@
+<div class="pageTtlContainer">
+  <div class="container">
+    <h1 class="pageTtl">講座申込</h1>
+  </div>
+</div>
+<div class="breadcrumbContainer">
+  <div class="container">
+    <ul class="breadcrumb" itemscope="" itemtype="https://schema.org/BreadcrumbList">
+      <li class="breadcrumb_item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="/"><span itemprop="name">TOP</span></a>
+        <meta itemprop="position" content="1">
+      </li>
+      <li class="breadcrumb_item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <span itemprop="name">講座申込</span>
+        <meta itemprop="position" content="2">
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec-apply">
+  <div class="container">
+    <p class="contactTxt">講座への申し込みをご希望される方は、以下を入力して送信してください。</p>
+    <form action="">
+      <table class="contactTable">
+        <tbody>
+          <tr class="contactTable_required">
+            <th><label for="name">お名前</label></th>
+            <td><input type="text" name="お名前" placeholder="" id="name" required></td>
+          </tr>
+          <tr class="contactTable_required">
+            <th><label for="ruby">ふりがな</label></th>
+            <td><input type="text" name="ふりがな" placeholder="" id="ruby" required></td>
+          </tr>
+          <tr class="contactTable_required">
+            <th><label for="tel">電話番号</label></th>
+            <td><input type="tel" name="電話番号" placeholder="" id="tel" required></td>
+          </tr>
+          <tr class="contactTable_required">
+            <th><label for="mail">メールアドレス</label></th>
+            <td><input type="email" name="メールアドレス" placeholder="" id="mail" required></td>
+          </tr>
+          <tr>
+            <th><label for="address">住所</label></th>
+            <td><input type="text" name="住所" placeholder="" id="address" required></td>
+          </tr>
+          <tr class="contactTable_required">
+            <th><label for="course">申し込む講座</label></th>
+            <td>
+              <div class="contactTable_radioRow">
+                <input type="radio" name="申し込む講座" value="エアリアルローズ講座/お試しコース" id="course1"><label for="course1">エアリアルローズ講座/お試しコース</label>
+              </div>
+              <div class="contactTable_radioRow">
+                <input type="radio" name="申し込む講座" value="エアリアルローズ講座/広げるコース" id="course2"><label for="course1">エアリアルローズ講座/広げるコース</label>
+              </div>
+              <div class="contactTable_radioRow">
+                <input type="radio" name="申し込む講座" value="エアリアルローズ講座/xxコース" id="course3"><label for="course3">エアリアルローズ講座/xxコース</label>
+              </div>
+              <div class="contactTable_radioRow">
+                <input type="radio" name="申し込む講座" value="ｘｘ講座" id="course4"><label for="course4">ｘｘ講座</label>
+              </div>
+              <div class="contactTable_radioRow">
+                <input type="radio" name="申し込む講座" value="その他（連絡事項へのご記入をお願いいたします。）" id="course5"><label for="course5">その他（連絡事項へのご記入をお願いいたします。）</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th><label for="message">連絡事項や<br>お問い合わせ</label></th>
+            <td>
+              <textarea name="連絡事項やお問い合わせ" rows="5" placeholder="何かございましたら、こちらにご入力ください。" id="message" ></textarea>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btnContainer">
+        <div class="btn">
+          <button type="submit">確認画面へ</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

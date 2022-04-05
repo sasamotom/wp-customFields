@@ -1,0 +1,19 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.p-about {
+  p {
+    margin-top: 2em;
+    + p {
+      margin-top: 1em;
+    }
+  }
+  .picContainer {
+    display: flex;
+    margin-top: 5rem;
+    justify-content: space-between;
+    img {
+      width: 32%;
+    }
+  }
+}
