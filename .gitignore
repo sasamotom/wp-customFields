@@ -6,8 +6,8 @@ yarn-error.log
 !/**/.gitkeep
 
 # WordPress
-/web/wp/*
-!/web/wp/wp-content/
-/web/wp/wp-content/*
-!/web/wp/wp-content/uploads/
-!/web/wp/wp-content/plugins/
+/web/wp_2022/*
+!/web/wp_2022/wp-content/
+/web/wp_2022/wp-content/*
+!/web/wp_2022/wp-content/uploads/
+!/web/wp_2022/wp-content/plugins/

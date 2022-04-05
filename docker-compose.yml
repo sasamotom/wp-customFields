@@ -1,0 +1,71 @@
+version: "3.8" # docker-composeの書式のバージョン
+
+services: # 以下にサーバ情報を記載
+  wordpress:
+    # image: wordpress:latest # 使用するWordPressのイメージ名とバージョン(latestは最新を表す https://hub.docker.com/_/wordpress)
+    build: ./docker/wordpress
+    env_file: .env
+    container_name: ${SITE_NAME}-wordpress
+    working_dir: /var/www/html/wp_2022
+    restart: always # PC再起動時などDocker自体が起動したときにこのサーバも自動で起動するよう設定
+    volumes:
+      - ./web:/var/www/html
+    ports:
+      - "8081:80"
+    depends_on: # 先に起動させるサーバを指定
+      - mysql
+  mysql: # データベースサーバ（MySql）名（任意の名前を指定可）
+    image: mysql:5.7 # 使用するデータベースのイメージ名とバージョン(https://hub.docker.com/_/mysql)
+    env_file: .env
+    container_name: ${SITE_NAME}-mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./docker/mysql/db_dump:/docker-entrypoint-initdb.d
+      - db:/var/lib/mysql
+    restart: always # PC再起動時などDocker自体が起動したときにこのサーバも自動で起動するよう設定
+    ports:
+      - '3307:3306'
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    env_file: .env
+    container_name: ${SITE_NAME}-phpmyadmin
+    links:
+      - mysql
+    ports:
+      - '8000:80'
+    volumes:
+      - ./docker/phpmyadmin/sessions:/sessions
+      - ./docker/phpmyadmin/phpmyadmin-misc.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
+  php:
+    build: ./docker/php
+    container_name: ${SITE_NAME}-php
+    volumes:
+      - ./web:/var/www/html
+      - ./src/wp_2022/wp-config.php:/var/www/html/wp_2022/wp-config.php
+      - ./htdocs${THEME_PATH}:/var/www/html${THEME_PATH}
+    links:
+      - mysql
+    depends_on:
+      - mysql
+    ports:
+      - '8080:80'
+    environment:
+      - VIRTUAL_HOST=${VHOST}
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: ${SITE_NAME}-nginx_proxy
+    ports:
+      - '80:80'
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./docker/nginx/custom_proxy_settings.conf:/etc/nginx/conf.d/custom_proxy_settings.conf:ro
+  mailhog:
+    image: mailhog/mailhog
+    container_name: ${SITE_NAME}-mailhog
+    ports:
+      - '8025:8025'
+      - '1025:1025'
+volumes:
+  db:
+# docker-compose build を初回だけ行って、buildする
+# docker-compose up -d で起動
