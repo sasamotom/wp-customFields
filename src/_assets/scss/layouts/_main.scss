@@ -1,0 +1,66 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+@use "sass:math";
+
+
+[class^="sec-"],
+[class*=" sec-"] {
+  padding-top: 7rem;
+  padding-bottom: 5rem;
+}
+
+.pageTtlContainer {
+  padding: 8rem 0 2rem;
+  .pageTtl {
+    font-size: 2.5rem;
+    &::first-letter {
+      padding: 1rem;
+      font-size:150%;
+      color: #fff;
+      background: $color01;
+    }
+  }
+}
+
+.breadcrumbContainer {
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    justify-content: flex-end;
+    &_item {
+      + .breadcrumb_item {
+        display: flex;
+        align-items: center;
+        &::before {
+          content: "";
+          display: block;
+          width: .5em;
+          height: .5em;
+          margin: 0 .8em 0 .5em;
+          transform: rotate(45deg);
+          border-top: 1px solid $color01;
+          border-right: 1px solid $color01;
+        }
+        > span {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.secTtl {
+  position: relative;
+  padding-bottom: 0.3em;
+  font-size: 2rem;
+  border-bottom: solid 3px rgba($color01, 0.3);
+  &::after {
+    content: " ";
+    position: absolute;
+    bottom: -3px;
+    display: block;
+    width: 10%;
+    border-bottom: solid 3px $color01;
+  }
+}

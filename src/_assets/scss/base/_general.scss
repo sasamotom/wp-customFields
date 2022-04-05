@@ -1,0 +1,85 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.container {
+  width: 96%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.-color01 {color: $color01!important;}
+.-color02 {color: $color02!important;}
+.-color03 {color: $color03!important;}
+
+.-textIndent {text-indent: 1em;}
+
+.-textLeft {text-align: left!important;}
+.-textCenter {text-align: center!important;}
+.-textRight {text-align: right!important;}
+
+.-textTop { vertical-align: top!important;}
+.-textMiddle { vertical-align: middle!important;}
+.-textBottom { vertical-align: bottom!important;}
+
+
+.-textSmall { font-size: 80%}
+.-textLarge { font-size: 180%}
+
+.-gothic {
+  font-family: $baseFont!important;
+}
+.-mincho {
+  font-family: $fontMincho!important;
+}
+
+
+// .-ib {
+//   display: inline-block;
+// }
+
+// .-en {
+//   font-family: $fontEn;
+// }
+
+.-txtS {
+  font-size: 0.8em;
+}
+
+.-txtL {
+  font-size: 1.375em;
+}
+
+// .-notoSerif {
+//   font-family: $fontSerif;
+// }
+
+// // ▼ You Tubeレスポンシブ対応用Box
+// .box-movie {
+//   position: relative;
+//   width: 100%;
+//   padding-top: 56.25%;
+//   iframe {
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     width: 100%;
+//     height: 100%;
+//   }
+// }
+
+// .-target,
+// .-ready,
+// .-action {
+//   /* Class for scroll animation */
+// }
+
+// .-parallax,
+// .-parallax-top,
+// .-parallax-bg {
+//   /* Class for parallax */
+// }
+
+// .-desvg,
+// .-notDesvg {
+//   /* Don't convert to inline SVG */
+// }

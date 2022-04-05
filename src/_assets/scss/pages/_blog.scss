@@ -1,0 +1,116 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.sec-blogList {
+  .articleList {
+    margin-top: 5rem;
+    > li {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #eee;
+      + li {
+        margin-top: 2rem;
+      }
+    }
+    a {
+      display: block;
+      &:hover {
+        filter: drop-shadow(3px 3px 5px rgba($color01, 0.8));
+      }
+    }
+  }
+
+  .articleDtl {
+    display: flex;
+    justify-content: space-between;
+    &_pic {
+      width: 20%;
+      background: rgba($color01, 0.1);
+      img {
+        width: 100%;
+        max-height: 10rem;
+        object-fit: contain;
+      }
+    }
+    .col2 {
+      width: 78%;
+    }
+    &_ttl {
+      font-size: 120%;
+    }
+    &_date {
+      font-size: 80%;
+      font-weight: bold;
+      color: $color01;
+    }
+    &_txt {
+      margin-top: 1em;
+    }
+  }
+}
+
+
+
+.sec-blog {
+  .btnContainer {
+    display: flex;
+    margin-top: 3rem;
+    justify-content: center;
+    align-items: center;
+    gap: 10%
+  }
+  .btn {
+    margin-top: 0;
+  }
+  .returnList {
+    a {
+      padding: 0.5em;
+      text-decoration: underline;
+      text-decoration-color: $color01;
+    }
+  }
+}
+
+.blogContainer {
+  margin-top: 3rem;
+  img.aligncenter {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  img.alignright {
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
+  }
+  h2,h3,h4,h5,h6 {
+    font-weight: bold;
+  }
+  h2 {
+    width: fit-content;
+    font-size: 170%;
+    border-bottom: 2px solid $color01;
+  }
+  h3 {
+    font-size: 150%;
+  }
+  h4 {
+    font-size: 120%;
+  }
+  h5 {
+    font-size: 110%;
+  }
+  ol, ul {
+    list-style-position: inside;
+    text-indent: -1.2em;
+    li {
+      margin-left: 1.2em;
+    }
+  }
+  ul {
+    list-style-type: square
+  }
+  a {
+    text-decoration: underline;
+    text-decoration-color: $color01;
+  }
+}

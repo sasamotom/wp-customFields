@@ -1,0 +1,93 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.p-course {
+  .courseList {
+    flex-direction: column;
+    margin-top: 3rem;
+    > li {
+      width: 100%;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #eee;
+    }
+  }
+  .courseDtl {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &_pic {
+      width: 25%;
+    }
+    &_name {
+      margin-top: 0;
+      font-weight: bold;
+      text-align: left;
+    }
+    &_txt {
+      margin-top: 1em;
+    }
+    &_col2 {
+      width: 72%;
+    }
+  }
+}
+
+.sec-courseDetail {
+  .courseTxt {
+    margin-top: 2em;
+  }
+  .coursePicList {
+    display: flex;
+    margin-top: 3rem;
+    gap: 1rem 2%;
+    > li {
+      width: 32%;
+    }
+  }
+  .courseInfo {
+    margin-top: 5rem;
+    > li {
+      + li {
+        margin-top: 5rem;
+      }
+    }
+    &_ttl {
+      width: fit-content;
+      font-size: 1.7rem;
+      font-weight: bold;
+      border-bottom: 1px solid $color01;
+    }
+    p {
+      margin-top: 1em;
+    }
+    &_table {
+      margin-top: 1rem;
+      border-spacing: 0 1rem;
+      border-collapse: separate;
+      tr {
+        margin-top: 1em;
+        border-bottom: 1px solid #aaa;
+      }
+      th, td {
+        padding: 0 1em;
+      }
+      th {
+        text-align: center;
+        color: #fff;
+        background: $color01
+      }
+    }
+    &_samplePicTtl {
+      margin-top: 2em;
+      font-size: 1.6rem;
+    }
+    &_pic {
+      display: flex;
+      margin-top: .5rem;
+      gap: 1rem 2%;
+      > li {
+        width: 32%;
+      }
+    }
+  }
+}

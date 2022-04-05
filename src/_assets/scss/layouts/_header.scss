@@ -1,0 +1,46 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.header {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  padding: 10px 20px;
+  background: rgba(lighten($color01, 23%), 0.9);
+  justify-content: space-between;
+  align-items: center;
+
+  .titleLogo {
+    width: 80px;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+.gnav {
+  &List {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .2em 1.5em;
+    li:not(.btn) {
+      a {
+        display: block;
+        font-size: 1.4rem;
+        &:hover {
+          color: $color01;
+        }
+      }
+    }
+    .btn {
+      margin-top: 0;
+    }
+  }
+}
+

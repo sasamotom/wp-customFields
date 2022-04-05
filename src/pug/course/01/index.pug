@@ -1,0 +1,9 @@
+extends ../../_base/_layout
+
+block vars
+  include ../../_base/_settings
+  - let key = "course"
+  - let page = pages[key]
+
+block contents
+  include ../../../html/_course/_01/_index.html
