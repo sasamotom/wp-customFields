@@ -305,9 +305,9 @@ gulp.task('php', ['clean:php'], () => {
     .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
     // .pipe(cached('php'))
     // .pipe(replace(dir.replace, ''))
-    .pipe(replace('/_assets/images', dir.wpImg))
-    .pipe(replace('/_assets/css', dir.wp + '/_assets/css'))
-    .pipe(replace('/_assets/js', dir.wp + '/_assets/js'))
+    // .pipe(replace('/_assets/images', dir.wpImg))
+    // .pipe(replace('/_assets/css', dir.wp + '/_assets/css'))
+    // .pipe(replace('/_assets/js', dir.wp + '/_assets/js'))
     .pipe(gulp.dest(dir.dist))
     .pipe(bs.stream());
 });

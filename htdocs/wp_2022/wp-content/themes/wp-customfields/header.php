@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja">
+<?php if ( is_home() && is_front_page() ) :?>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<?php else: ?>
+ <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/article#">
+<?php endif; ?>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <!-- <link rel="stylesheet" href="<?php echo get_theme_file_uri(); ?>/_assets/css/style.css" type="text/css" /> -->
+  <!-- <link rel="shortcut icon" href=""> -->
+<?php wp_enqueue_script('jquery'); ?>
+<?php wp_head(); ?>
+  <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:ital@1&amp;text=0123456789AQSupportMEGThanksHeart&amp;display=swap"> -->
+</head>
+<body <?php body_class(); ?>>
+<header class="header">
+  <div class="titleLogo">
+    <a href="/"><img src="<?php echo site_url(); ?>/wp-content/uploads/logo.svg" alt="WP CustomFields" width="102" height="62" /></a>
+  </div>
+  <nav class="gnav" id="gnav">
+    <ul class="gnavList">
+      <li><a href="<?php echo home_url(); ?>/about/">パステルアートについて</a></li>
+      <li><a href="<?php echo home_url(); ?>/course/">講座一覧</a></li>
+      <li><a href="<?php echo home_url(); ?>/faq/">よくある質問</a></li>
+      <li><a href="<?php echo home_url(); ?>/blog/">BLOG</a></li>
+      <li class="btn"><a href="<?php echo home_url(); ?>/apply/">講座申込</a></li>
+    </ul>
+  </nav>
+</header>
