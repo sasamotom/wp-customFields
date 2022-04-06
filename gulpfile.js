@@ -47,7 +47,7 @@ const dir = {
 };
 const setting = {
   vhost: process.env.VHOST,   // .envで設定
-  enableVhost: false,         // true:WP構築時 ／ false:静的コーディング時
+  enableVhost: true,         // true:WP構築時 ／ false:静的コーディング時
   external: true
 };
 
@@ -104,7 +104,7 @@ gulp.task('clean:dist', callback => {
     dir.dist + '/**/*.*',
     '!' + dir.dist + dir.wp + '/_assets/css/**/*.*',
     '!' + dir.dist + dir.wp + '/_assets/js/**/*.*',
-    '!' + dir.dist + dir.wp + '/_assets/images/**/*.*',
+    '!' + dir.dist + dir.wpImg + '/**/*.*',
     '!' + dir.dist + dir.wp + '/**/*.php',
     '!' + dir.dist + '/**/*.html'
   ], callback);
@@ -125,7 +125,7 @@ gulp.task('clean:scripts', callback => {
 });
 
 gulp.task('clean:images', callback => {
-  return del([dir.dist + dir.wp + '/_assets/images/**/*.*'], callback);
+  return del([dir.dist + dir.wpImg + '/**/*.*'], callback);
 });
 
 gulp.task('clean:html', callback => {
@@ -249,6 +249,7 @@ gulp.task('imagemin', () => {
     ]))
     .pipe(imagemin())
     .pipe(gulp.dest(dir.dist + dir.wpImg))
+    .pipe(gulp.dest('./web' + dir.wpImg))
     .pipe(bs.stream());
 });
 
