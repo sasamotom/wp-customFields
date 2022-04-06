@@ -38,8 +38,8 @@ else :
 endif;
 ?>
 <?php
-  $prev_post = get_previous_post(false);
-  $next_post = get_next_post(false);
+  $next_post = get_previous_post(false);
+  $prev_post = get_next_post(false);
 ?>
 
       </article>
