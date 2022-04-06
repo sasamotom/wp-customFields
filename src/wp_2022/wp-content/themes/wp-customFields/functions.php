@@ -439,7 +439,7 @@ function pagination($pages = '', $range = 1, $anchor = '') {
   $str = '';    // ページネーションのHTML
   if(1 != $pages) {
     // 全ページ数が１でない場合はページネーションを表示する
-    $str.= '<ol class="pagenation">\n';
+    $str.= '<ol class="pagination">';
     // 最初のページへのリンク
     $str.= '<li class="first"><a href="' . get_pagenum_link(1).$anchor . '">FIRST</a></li>';
     // 一つ前のページへのリンク
@@ -621,13 +621,15 @@ function get_page_parent( $parent_id , $object = true , $root = true ) {
 // --------------------------------------------------------------
 // 投稿にて一番始めに出てくる画像のURLを取得
 // --------------------------------------------------------------
-function catch_that_image() {
+function first_image() {
   global $post, $posts;
   $first_img = '';
   ob_start();
   ob_end_clean();
-  $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
-  $first_img = $matches [1] [0];
+  preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+  if (count($matches[1]) > 0) {
+    $first_img = $matches[1][0];
+  }
   // if(empty($first_img)){
   //   // 記事内で画像がなかったときのためのデフォルト画像を指定
   //   $first_img = "/images/default.jpg";
