@@ -626,7 +626,7 @@ a .courseDtl:hover .courseDtl_name {
   padding-top: 1.5em;
   border-top: 1px solid #eee
 }
-.pagenation {
+.pagination {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -640,8 +640,8 @@ a .courseDtl:hover .courseDtl_name {
   gap: 1em;
   list-style-type: none
 }
-.pagenation a,
-.pagenation span {
+.pagination a,
+.pagination span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -657,48 +657,48 @@ a .courseDtl:hover .courseDtl_name {
   -ms-flex-align: center;
   align-items: center
 }
-.pagenation a:hover {
+.pagination a:hover {
   border-width: 3px;
   border-width: 0.3rem
 }
-.pagenation span {
+.pagination span {
   color: #fff;
   background: #8bd2ec
 }
-.pagenation .prev,
-.pagenation .next,
-.pagenation .first,
-.pagenation .last {
+.pagination .prev,
+.pagination .next,
+.pagination .first,
+.pagination .last {
   overflow: hidden
 }
-.pagenation .prev a,
-.pagenation .prev span,
-.pagenation .next a,
-.pagenation .next span,
-.pagenation .first a,
-.pagenation .first span,
-.pagenation .last a,
-.pagenation .last span {
+.pagination .prev a,
+.pagination .prev span,
+.pagination .next a,
+.pagination .next span,
+.pagination .first a,
+.pagination .first span,
+.pagination .last a,
+.pagination .last span {
   position: relative;
   text-indent: 100rem;
   color: transparent
 }
-.pagenation .prev a::before,
-.pagenation .prev a::after,
-.pagenation .prev span::before,
-.pagenation .prev span::after,
-.pagenation .next a::before,
-.pagenation .next a::after,
-.pagenation .next span::before,
-.pagenation .next span::after,
-.pagenation .first a::before,
-.pagenation .first a::after,
-.pagenation .first span::before,
-.pagenation .first span::after,
-.pagenation .last a::before,
-.pagenation .last a::after,
-.pagenation .last span::before,
-.pagenation .last span::after {
+.pagination .prev a::before,
+.pagination .prev a::after,
+.pagination .prev span::before,
+.pagination .prev span::after,
+.pagination .next a::before,
+.pagination .next a::after,
+.pagination .next span::before,
+.pagination .next span::after,
+.pagination .first a::before,
+.pagination .first a::after,
+.pagination .first span::before,
+.pagination .first span::after,
+.pagination .last a::before,
+.pagination .last a::after,
+.pagination .last span::before,
+.pagination .last span::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -708,55 +708,55 @@ a .courseDtl:hover .courseDtl_name {
   border-top: 1px solid #49b9e1;
   border-right: 1px solid #49b9e1
 }
-.pagenation .prev span,
-.pagenation .next span,
-.pagenation .first span,
-.pagenation .last span {
+.pagination .prev span,
+.pagination .next span,
+.pagination .first span,
+.pagination .last span {
   border-color: #ddd;
   background: #fff
 }
-.pagenation .prev span::before,
-.pagenation .prev span::after,
-.pagenation .next span::before,
-.pagenation .next span::after,
-.pagenation .first span::before,
-.pagenation .first span::after,
-.pagenation .last span::before,
-.pagenation .last span::after {
+.pagination .prev span::before,
+.pagination .prev span::after,
+.pagination .next span::before,
+.pagination .next span::after,
+.pagination .first span::before,
+.pagination .first span::after,
+.pagination .last span::before,
+.pagination .last span::after {
   border-color: #ddd
 }
-.pagenation .prev a::before,
-.pagenation .prev span::before,
-.pagenation .next a::before,
-.pagenation .next span::before {
+.pagination .prev a::before,
+.pagination .prev span::before,
+.pagination .next a::before,
+.pagination .next span::before {
   left: 38%;
   -webkit-transform: translateY(-50%) rotate(45deg);
   transform: translateY(-50%) rotate(45deg)
 }
-.pagenation .prev a::after,
-.pagenation .prev span::after,
-.pagenation .next a::after,
-.pagenation .next span::after {
+.pagination .prev a::after,
+.pagination .prev span::after,
+.pagination .next a::after,
+.pagination .next span::after {
   display: none
 }
-.pagenation .first a::before,
-.pagenation .first span::before,
-.pagenation .last a::before,
-.pagenation .last span::before {
+.pagination .first a::before,
+.pagination .first span::before,
+.pagination .last a::before,
+.pagination .last span::before {
   left: 30%;
   -webkit-transform: translateY(-50%) rotate(45deg);
   transform: translateY(-50%) rotate(45deg)
 }
-.pagenation .first a::after,
-.pagenation .first span::after,
-.pagenation .last a::after,
-.pagenation .last span::after {
+.pagination .first a::after,
+.pagination .first span::after,
+.pagination .last a::after,
+.pagination .last span::after {
   left: 48%;
   -webkit-transform: translateY(-50%) rotate(45deg);
   transform: translateY(-50%) rotate(45deg)
 }
-.pagenation .prev,
-.pagenation .first {
+.pagination .prev,
+.pagination .first {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg)
 }
@@ -839,7 +839,8 @@ a .courseDtl:hover .courseDtl_name {
   font-size: 1.3rem;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
-  justify-content: flex-end
+  justify-content: flex-end;
+  list-style-type: none
 }
 .breadcrumbContainer .breadcrumb_item + .breadcrumb_item {
   display: -webkit-box;
