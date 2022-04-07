@@ -663,8 +663,6 @@ add_filter( 'mwform_custom_mail_tag', 'send_date_time', 10, 3 );
 // --------------------------------------------------------------
 // ACF関連のファイル読み込み
 // --------------------------------------------------------------
-// require_once ( 'acf/acf-seminar.php' );
-// require_once ( 'acf/acf-voice.php' );
-// require_once ( 'acf/acf-beuseful.php' );
+require_once ( 'acf/acf-faq.php' );
 
 ?>
