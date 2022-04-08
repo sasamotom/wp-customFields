@@ -104,7 +104,7 @@ gulp.task('clean:dist', callback => {
     dir.dist + '/**/*.*',
     '!' + dir.dist + dir.wp + '/_assets/css/**/*.*',
     '!' + dir.dist + dir.wp + '/_assets/js/**/*.*',
-    '!' + dir.dist + dir.wp + '/_assets/images/**/*.*',
+    '!' + dir.dist + dir.wpImg + '/**/*.*',
     '!' + dir.dist + dir.wp + '/**/*.php',
     '!' + dir.dist + '/**/*.html'
   ], callback);
@@ -125,7 +125,7 @@ gulp.task('clean:scripts', callback => {
 });
 
 gulp.task('clean:images', callback => {
-  return del([dir.dist + dir.wp + '/_assets/images/**/*.*'], callback);
+  return del([dir.dist + dir.wpImg + '/**/*.*'], callback);
 });
 
 gulp.task('clean:html', callback => {
