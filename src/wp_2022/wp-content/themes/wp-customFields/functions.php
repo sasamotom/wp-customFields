@@ -260,14 +260,18 @@ function pagename_class($classes) {
     $page = get_post(get_the_ID());
     $classes[] = 'p-'.$page->post_name;
   }
-  elseif (is_category() || is_single()) { //slugを追加
+  elseif(get_post_type() === 'post') {
     $category = get_the_category();
-    $classes[] .= 'p-'.$category[0]->parent;
+    $classes[] .= 'p-'.$category[0]->slug;
+  }
+  elseif (is_post_type_archive() || is_single()) { //slugを追加
+    global $post;
+    $classes[] .= 'p-'.$post->post_type;
   }
   elseif (is_front_page()) {
     $classes[] = 'p-front-page';
   }
-  elseif ( is_404() ) {
+  elseif (is_404()) {
     $classes[] = 'p-404';
   }
   if (wp_is_mobile()) {
@@ -664,5 +668,6 @@ add_filter( 'mwform_custom_mail_tag', 'send_date_time', 10, 3 );
 // ACF関連のファイル読み込み
 // --------------------------------------------------------------
 require_once ( 'acf/acf-faq.php' );
+require_once ( 'acf/acf-course.php' );
 
 ?>
