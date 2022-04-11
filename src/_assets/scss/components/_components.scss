@@ -5,7 +5,7 @@
 
 .btn {
   margin-top: 3rem;
-  a, button, span {
+  a, button, span, input {
     display: flex;
     width: fit-content;
     max-width: 300px;
@@ -32,7 +32,7 @@
       border-right: 1px solid $color01;
     }
   }
-  a, button {
+  a, button, input {
     &:hover {
       color: #fff;
       background: $color01;
@@ -47,6 +47,32 @@
     border-color: #ddd;
     &::after {
       border-color: #ddd;
+    }
+  }
+  &.-input {
+    position: relative;
+    &::after {
+      content: "";
+      position: relative;
+      position: absolute;
+      top: 50%;
+      right: 1em;
+      display: block;
+      width: 0.4em;
+      height: 0.4em;
+      transition: .3s;
+      transform: translate(0, -50%) rotate(45deg) ;
+      border-top: 1px solid $color01;
+      border-right: 1px solid $color01;
+    }
+    &:hover {
+      &::after {
+        transform: translate(.2em, -50%) rotate(45deg);
+        border-color: #fff;
+      }
+    }
+    input {
+      padding-right: 2em;
     }
   }
   &.-back {
