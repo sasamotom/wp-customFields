@@ -59,7 +59,7 @@ services: # 以下にサーバ情報を記載
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./docker/nginx/custom_proxy_settings.conf:/etc/nginx/conf.d/custom_proxy_settings.conf:ro
-  mailhog:
+  mailhog: # http://localhost:8025/ をブラウザで表示するとWPから送信されたメールが閲覧できる
     image: mailhog/mailhog
     container_name: ${SITE_NAME}-mailhog
     ports:
