@@ -1288,7 +1288,7 @@ a .courseDtl:hover .courseDtl_name {
   border-radius: 0.2rem;
   background: #ec8ba2
 }
-.contactTable.-confirm td {
+.mw_wp_form_confirm .contactTable td {
   width: 100%;
   padding: 0.5em;
   background: #f3f3f3
