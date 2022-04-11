@@ -184,12 +184,13 @@
       }
     }
   }
-  &.-confirm {
-    // 確認画面
-    td {
-      width: 100%;
-      padding: .5em;
-      background: #f3f3f3;
-    }
+}
+
+// 確認画面
+.mw_wp_form_confirm .contactTable {
+  td {
+    width: 100%;
+    padding: .5em;
+    background: #f3f3f3;
   }
 }
