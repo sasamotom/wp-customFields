@@ -1,0 +1,162 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.site2Mv {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  background: url(/wp_2022/wp-content/uploads/2_mv.jpg) center center / cover;
+  &_ttl {
+    padding-top: 60vh;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 30px rgba(#000, 50%);
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 80vh;
+    left: 95%;
+    display: block;
+    width: 1px;
+    height: 15vh;
+    transform-origin: top;
+    animation: scroll 3s linear infinite;
+    background: $colorText;
+    background: $color02;
+  }
+  &::after {
+    content: "scroll";
+    position: absolute;
+    top: 80vh;
+    left: calc(95% + 2rem);
+    display: block;
+    transform: rotate(90deg);
+    transform-origin: top left;
+  }
+}
+@keyframes scroll {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  51% {
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+@keyframes scroll2 {
+  0% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+  80% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.site2 {
+  .topNews {
+    padding: 8rem 0;
+  }
+  .topSite2 {
+    padding: 8rem 0;
+    background: rgba($color02, 20%);
+    .secTtl {
+      margin-right: auto;
+      margin-left: auto;
+      &::after {
+        display: none;
+      }
+    }
+    .textArea {
+      position: relative;
+      margin-top: 5rem;
+      .pic {
+        position: relative;
+        z-index: 1;
+        width: 40%;
+        margin-top: -16rem;
+        margin-left: 30%;
+      }
+      &_txtL,
+      &_txtR {
+        position: relative;
+        z-index: 2;
+        min-width: 30rem;
+        font-size: 120%;
+        line-height: 5;
+      }
+      &_txtL {
+        // margin-right: 67%;
+        width: 33%;
+        text-align: right;
+      }
+      &_txtR {
+        width: 33%;
+        margin-top:-7rem;
+        margin-right: 0;
+        margin-left: auto;
+      }
+    }
+  }
+  .topFooterLinks {
+    display: flex;
+    margin-top: 8rem;
+    > li {
+      width: 50%;
+    }
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 10rem 0;
+      text-align: center;
+      span {
+        position: relative;
+        z-index: 1;
+        padding: .5em 1em;
+        background: rgba($color02, 60%);
+        &::before {
+          content: "";
+          position: absolute;
+          z-index: -1;
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 100%;
+          transition: .5s;
+          background: rgba($color02, 60%);
+        }
+      }
+      &:hover {
+        span {
+          &::before {
+            width: 100%;
+          }
+        }
+      }
+    }
+    .goStoreList {
+      a {
+        background: url(/wp_2022/wp-content/uploads/2_img09.jpg) center center / cover;
+      }
+    }
+    .goXXXX {
+      a {
+        background: url(/wp_2022/wp-content/uploads/2_img10.jpg) center center / cover;
+      }
+    }
+  }
+}

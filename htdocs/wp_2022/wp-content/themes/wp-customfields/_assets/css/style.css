@@ -920,6 +920,28 @@ a .courseDtl:hover .courseDtl_name {
   font-size: 1rem;
   text-align: center
 }
+.footer .linkList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 1em
+}
+.footer .linkList > li a {
+  padding: 0.2em 1em;
+  font-size: 10px;
+  font-size: 1rem;
+  opacity: 0.7;
+  border: 1px solid #000
+}
+.footer .linkList > li a[href="/"] {
+  border-color: #8bd2ec
+}
+.footer .linkList > li a[href="/site2/"] {
+  border-color: #fff3d7
+}
 .p-about p {
   margin-top: 2em
 }
@@ -1011,15 +1033,18 @@ a .courseDtl:hover .courseDtl_name {
   -webkit-text-decoration-color: #8bd2ec;
   text-decoration-color: #8bd2ec
 }
-.blogContainer {
+.blogContainer,
+.editContainer {
   margin-top: 3rem
 }
-.blogContainer img.aligncenter {
+.blogContainer img.aligncenter,
+.editContainer img.aligncenter {
   display: block;
   margin-right: auto;
   margin-left: auto
 }
-.blogContainer img.alignright {
+.blogContainer img.alignright,
+.editContainer img.alignright {
   display: block;
   margin-right: 0;
   margin-left: auto
@@ -1028,10 +1053,16 @@ a .courseDtl:hover .courseDtl_name {
 .blogContainer h3,
 .blogContainer h4,
 .blogContainer h5,
-.blogContainer h6 {
+.blogContainer h6,
+.editContainer h2,
+.editContainer h3,
+.editContainer h4,
+.editContainer h5,
+.editContainer h6 {
   font-weight: bold
 }
-.blogContainer h2 {
+.blogContainer h2,
+.editContainer h2 {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -1039,28 +1070,37 @@ a .courseDtl:hover .courseDtl_name {
   border-bottom: 2px solid #8bd2ec;
   border-bottom: 0.2rem solid #8bd2ec
 }
-.blogContainer h3 {
+.blogContainer h3,
+.editContainer h3 {
   font-size: 150%
 }
-.blogContainer h4 {
+.blogContainer h4,
+.editContainer h4 {
   font-size: 120%
 }
-.blogContainer h5 {
+.blogContainer h5,
+.editContainer h5 {
   font-size: 110%
 }
 .blogContainer ol,
-.blogContainer ul {
+.blogContainer ul,
+.editContainer ol,
+.editContainer ul {
   list-style-position: inside;
   text-indent: -1.2em
 }
 .blogContainer ol li,
-.blogContainer ul li {
+.blogContainer ul li,
+.editContainer ol li,
+.editContainer ul li {
   margin-left: 1.2em
 }
-.blogContainer ul {
+.blogContainer ul,
+.editContainer ul {
   list-style-type: square
 }
-.blogContainer a {
+.blogContainer a,
+.editContainer a {
   text-decoration: underline;
   -webkit-text-decoration-color: #8bd2ec;
   text-decoration-color: #8bd2ec

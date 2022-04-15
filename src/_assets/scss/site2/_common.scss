@@ -1,0 +1,364 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+body {
+  font-family: $fontMincho;
+}
+
+.header {
+  background: none;
+  // backdrop-filter: blur(4px);
+  .gnav .gnavList {
+    a {
+      &::after {
+        content: "";
+        display: block;
+        width:0;
+        height: 1px;
+        transition: .5s;
+        background: $color02;
+      }
+      &:hover {
+        color: $colorText;
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.site2 {
+  .btn {
+    a {
+      position: relative;
+      margin-right: 0;
+      margin-left: auto;
+      padding: 0.2em 2.5em;
+      letter-spacing: normal;
+      color: $colorText;
+      border: none;
+      background: transparent;
+      &::before {
+        content: "";
+        position: absolute;
+        right: .5em;
+        bottom: 0;
+        display: block;
+        width: 3em;
+        height: 1px;
+        transition: .3s;
+        background: darken($color02, 10%);
+      }
+      &::after {
+        position: absolute;
+        right: .5em;
+        bottom: 0;
+        width: .5em;
+        height: 1px;
+        transform: rotate(45deg);
+        transform-origin: right;
+        border: none;
+        background: darken($color02, 10%);
+      }
+      &:hover {
+        background: transparent;
+        &::before,
+        &::after {
+          right: 0;
+        }
+        &::before {
+          width: 3.5em;
+        }
+      }
+    }
+  }
+
+  .secTtl {
+    position: relative;
+    width: fit-content;
+    margin-top: 1em;
+    padding-bottom: 0;
+    font-size: 2rem;
+    font-weight: normal;
+    border: none;
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      border: none;
+      background: rgb(255,243,215);
+      background: linear-gradient(90deg, rgb(251, 226, 167) 0%, rgba(255,243,215,1) 100%);
+    }
+  }
+
+  .newsList {
+    margin-top: 3rem;
+    > li {
+      border-bottom: 1px solid #eee;
+      &:first-child {
+        border-top: 1px solid #eee;
+      }
+    }
+    &_item {
+      display: flex;
+      padding: 1em .5em;
+      align-items: center;
+      &::after {
+        content: "";
+        display: block;
+        width: 6px;
+        height: 9px;
+        margin: 0 0 0 auto;
+        transition: .3s;
+        background: #eee;
+        flex-shrink: 0;
+        clip-path: polygon(0 0, 0% 100%, 100% 50%);
+      }
+      &:hover {
+        &::after {
+          background: darken($color02, 10%);
+        }
+      }
+    }
+    &_date {
+      flex-shrink: 0;
+    }
+    &_tag {
+      display: inline-block;
+      margin-left: 1em;
+      padding: 0 0.5em;
+      font-size: 70%;
+      letter-spacing: -.1em;
+      flex-shrink: 0;
+      &.cate01 {
+        background: $color03;
+      }
+      &.cate02 {
+        background: $color02;
+      }
+      &.cate03 {
+        border: 1px solid #f3f3f3;
+      }
+    }
+    &_txt {
+      margin-left: 1em;
+    }
+  }
+
+  .sec-Items {
+    + .sec-Items {
+      padding-top: 2rem;
+    }
+  }
+  .itemList {
+    display: flex;
+    margin-top: 5rem;
+    gap: 2em 0.66%;
+    flex-wrap: wrap;
+    > li {
+      width: 24%;
+    }
+    .itemDtl {
+      &_pic {
+        img {
+          aspect-ratio: 1;
+          object-fit: cover;
+        }
+      }
+      &_name {
+        width: fit-content;
+        margin-top: .5em;
+        font-size: 110%;
+        &::after {
+          content: "";
+          display: block;
+          width: 0;
+          height: 1px;
+          transition: .5s;
+          background: $color02;
+        }
+      }
+      &_price {
+        font-size: 80%;
+      }
+      &:hover {
+        .itemDtl_name {
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .pageTtlContainer {
+    position: relative;
+    padding: 8rem 0;
+    background: url(/wp_2022/wp-content/uploads/2_img05.jpg) center center / cover;
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 60%;
+      background: rgb(255,255,255);
+      background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    }
+    &.news {
+      background-image: url(/wp_2022/wp-content/uploads/2_img02.jpg);
+    }
+    &.item {
+      background-image: url(/wp_2022/wp-content/uploads/2_img08.jpg);
+      background-position: center top 70%;
+    }
+    &.store {
+      background-image: url(/wp_2022/wp-content/uploads/2_img09.jpg);
+    }
+    .site2PageTtl {
+      font-size: 4rem;
+      text-shadow: 0 0 1rem #fff;
+    }
+  }
+
+  .pagination {
+    > li {
+      a, span {
+        color: $colorText;
+        border: none;
+        border-radius: 0;
+        background: none;
+      }
+      span {
+        text-decoration: underline;
+      }
+      a:hover {
+        opacity: .5;
+      }
+    }
+    .first, .prev, .next, .last {
+      a::before,
+      a::after {
+        width: 13%;
+        height: 13%;
+        border-color: $colorText;
+      }
+      a::after {
+        left: 39%;
+      }
+    }
+  }
+
+  .editContainer {
+    h2 {
+      border-color: $color02;
+    }
+    a {
+      text-decoration-color: $color02;
+    }
+  }
+
+  .preNextBtnContainer {
+    display: flex;
+    margin-top: 5rem;
+    align-items: center;
+    justify-content: space-between;
+    .btn {
+      margin-top: 0;
+      a, span {
+        font-size: 80%;
+        border: none;
+        &::before,
+        &::after {
+          display: none;
+        }
+      }
+      a:hover {
+        opacity: .5;
+      }
+    }
+  }
+
+  .cateList {
+    display: flex;
+    flex-wrap: wrap;
+    > li {
+      + li {
+        margin-left: 0.5em;
+      }
+    }
+    a, span {
+      padding: 0.5em;
+      border: 1px solid #eee;
+    }
+    a {
+      &:hover {
+        border-color: $colorText;
+      }
+    }
+    span {
+      border-color: $colorText;
+    }
+  }
+
+  .goodBtnContainer {
+    display: flex;
+    margin-top: 4rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    button{
+      padding: 0;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      appearance: none;
+    }
+    .goodBtn {
+      position: relative;
+      z-index: 1;
+      display: block;
+      overflow: hidden;
+      padding: .5em 2em .2em 1em;
+      font-family: $fontMincho;
+      font-size: 14px;
+      color: #555;
+      border: none;
+      border: 2px solid $color02;
+      background: transparent;
+      &::first-letter {
+        font-size: 150%;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        display: block;
+        width: 80%;
+        height: 80%;
+        transition: .3s;
+        transform: translate(-50%, -50%);
+        opacity: .7;
+        background: url(/wp_2022/wp-content/uploads/2_icon_heart.svg) right center / contain no-repeat;
+      }
+      &:hover {
+        &::before {
+          width: 140%;
+          height: 200%;
+        }
+      }
+      &.-clicked {
+        color: #888;
+        &::after {
+          content: "済";
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+extends ../../_base/_layout2
+
+block vars
+  include ../../_base/_settings
+  - let key = "site2store"
+  - let page = pages[key]
+  - let parent = "site2"
+
+block contents
+  include ../../../html/_site2/_store/_index.html

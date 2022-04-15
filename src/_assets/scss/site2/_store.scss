@@ -1,0 +1,40 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.site2 {
+  .sec-store {
+    .storeList {
+      >li {
+        + li {
+          margin-top: 7rem;
+        }
+      }
+    }
+    .stotreInfoContainer {
+      display: flex;
+      margin-top: 3rem;
+      justify-content: space-between;
+      align-items: flex-end;
+      .pic {
+        width: 40%;
+      }
+      .storeTbl {
+        display: flex;
+        width: 58%;
+        font-size: 90%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        dt {
+          width: 5em;
+          text-align: center;
+          background: $color02;
+        }
+        dd {
+          width: calc(100% - 6em);
+          padding: .5em 0;
+        }
+      }
+    }
+  }
+}

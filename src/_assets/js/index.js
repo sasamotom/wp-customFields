@@ -1,12 +1,9 @@
-// import test from './utils/test';
-// import igarashi_san from './utils/igarashi_san';
-// import Person from './class/Person';
+import swiper from './class/swiper';
+import microModal from './class/micromodal'
 
-// test.foo();
-// test.bar();
+window.addEventListener('DOMContentLoaded', () => {
+  new swiper();
+  new microModal();
+});
 
-// igarashi_san();
-
-// let es6 = new Person('ECMAScript 2015');
-// es6.sayHello();
 

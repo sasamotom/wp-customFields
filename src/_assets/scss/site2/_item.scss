@@ -1,0 +1,177 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.site2 {
+  .mySwiper2 {
+    width: 100%;
+    height: 400px;
+  }
+
+  .mySwiper {
+    box-sizing: border-box;
+    height: 100px;
+    padding: 10px 0;
+  }
+
+  .mySwiper .swiper-slide {
+    width: 25%;
+    height: 100%;
+    line-height: 80px;
+    opacity: 0.4;
+  }
+
+  .mySwiper .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+
+  .itemData {
+    display: flex;
+    justify-content: space-between;
+    &_pic {
+      width: 40%;
+      .swiper {
+        overflow: hidden;
+      }
+      .mySwiperMain {
+        .swiper-wrapper {
+          width: 100%;
+          height: 50rem;
+          background: rgba($color02, 0.2);
+        }
+        .swiper-slide {
+          display: flex;
+          opacity: 0 !important;  // fadeIn表示で裏の画像を非表示にしたいので
+          justify-content: center;
+          align-items: center;
+          &.swiper-slide-active {
+            opacity: 1 !important;
+          }
+        }
+      }
+      .thumbContainer {
+        position: relative;
+        margin-top: 1rem;
+        .mySwiperThumb {
+          .swiper-slide {
+            img {
+              aspect-ratio: 1;
+              object-fit: cover;
+            }
+          }
+        }
+        .swiper-button-prev,
+        .swiper-button-next {
+          background-image: none;
+          &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            display: block;
+            width: .7rem;
+            height: .7rem;
+          }
+        }
+        .swiper-button-prev {
+          left: -2rem;
+          &::before {
+            right: 40%;
+            transform: rotate(-45deg) translate(-50%, -50%);
+            border-top: 1px solid $colorText;
+            border-left: 1px solid $colorText;
+          }
+        }
+        .swiper-button-next {
+          right: -2rem;
+          left: auto;
+          &::before {
+            left: 40%;
+            transform: rotate(45deg) translate(-50%, -50%);
+            border-top: 1px solid $colorText;
+            border-right: 1px solid $colorText;
+          }
+        }
+      }
+    }
+    &_info {
+      width: 50%;
+    }
+    &_name {
+      font-size: 150%;
+    }
+    &_cate {
+      .cateList {
+        margin-top: 1rem;
+        > li {
+          padding: 0 .5em;
+          font-size: 1rem;
+          opacity: .7;
+          border: 1px solid #aaa;
+        }
+      }
+    }
+    &_txt {
+      margin-top: 5rem;
+    }
+    &_table {
+      .itemTbl {
+        display: flex;
+        margin-top: 5rem;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 90%;
+        dt {
+          width: 5em;
+          text-align: center;
+          background: $color02;
+        }
+        dd {
+          width: calc(100% - 6em);
+          padding: .5em 0;
+        }
+      }
+    }
+    &_tag {
+      .tagList {
+        display: flex;
+        margin-top: 5rem;
+        font-size: 80%;
+        opacity: .8;
+        > li {
+          &::before {
+            content: "#";
+          }
+          + li {
+            margin-left: 1em;
+          }
+        }
+      }
+    }
+  }
+  .itemStory {
+    margin-top: 10rem;
+    > li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      + li {
+        margin-top: 5rem;
+      }
+      &:nth-child(2n) {
+        flex-direction: row-reverse;
+      }
+      .pic {
+        width: 40%;
+      }
+      .txts {
+        width: 55%;
+        &_ttl {
+          font-size: 130%;
+          + .txts_txt {
+            margin-top: 2em;
+          }
+        }
+      }
+    }
+  }
+}
