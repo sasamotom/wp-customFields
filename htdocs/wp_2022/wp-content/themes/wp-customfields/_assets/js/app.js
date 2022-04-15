@@ -1,6 +1,65 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/ 		var executeModules = data[2];
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 		// add entry modules from loaded chunk to deferred list
+/******/ 		deferredModules.push.apply(deferredModules, executeModules || []);
+/******/
+/******/ 		// run deferred modules when all chunks ready
+/******/ 		return checkDeferredModules();
+/******/ 	};
+/******/ 	function checkDeferredModules() {
+/******/ 		var result;
+/******/ 		for(var i = 0; i < deferredModules.length; i++) {
+/******/ 			var deferredModule = deferredModules[i];
+/******/ 			var fulfilled = true;
+/******/ 			for(var j = 1; j < deferredModule.length; j++) {
+/******/ 				var depId = deferredModule[j];
+/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 			}
+/******/ 			if(fulfilled) {
+/******/ 				deferredModules.splice(i--, 1);
+/******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 			}
+/******/ 		}
+/******/ 		return result;
+/******/ 	}
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"main": 0
+/******/ 	};
+/******/
+/******/ 	var deferredModules = [];
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -79,28 +138,139 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/_assets/js/index.js");
+/******/
+/******/ 	// add entry module to deferred list
+/******/ 	deferredModules.push(["./src/_assets/js/index.js","commons~main"]);
+/******/ 	// run deferred modules when ready
+/******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./src/_assets/js/class/micromodal.js":
+/*!********************************************!*\
+  !*** ./src/_assets/js/class/micromodal.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _default; });
+/* harmony import */ var micromodal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! micromodal */ "./node_modules/micromodal/dist/micromodal.es.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var _default = function _default() {
+  var _this = this;
+
+  _classCallCheck(this, _default);
+
+  this.modalElem = document.getElementById("modal");
+  this.contentElem = document.getElementById("c-modal_content");
+  this.triggerElem = document.getElementById("modal-trigger");
+  this.movieIframeElems = document.querySelectorAll(".movieModal iframe");
+
+  var onClose = function onClose() {
+    if (_this.contentElem) {
+      _this.contentElem.innerHTML = "";
+    }
+
+    if (_this.movieIframeElems.length > 0) {
+      for (var i = 0; i < _this.movieIframeElems.length; i++) {
+        // モーダルを閉じる際に動画を停止
+        _this.movieIframeElems[i].contentWindow.postMessage('{"event":"command", "func":"stopVideo"}', '*');
+      }
+    }
+  };
+
+  micromodal__WEBPACK_IMPORTED_MODULE_0__["default"].init({
+    onClose: onClose,
+    disableScroll: true,
+    disableFocus: true,
+    awaitOpenAnimation: true,
+    awaitCloseAnimation: true
+  });
+};
+
+
+
+/***/ }),
+
+/***/ "./src/_assets/js/class/swiper.js":
+/*!****************************************!*\
+  !*** ./src/_assets/js/class/swiper.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _default; });
+/* harmony import */ var swiper_dist_js_swiper_min_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper/dist/js/swiper.min.js */ "./node_modules/swiper/dist/js/swiper.min.js");
+/* harmony import */ var swiper_dist_js_swiper_min_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(swiper_dist_js_swiper_min_js__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var _default = function _default() {
+  _classCallCheck(this, _default);
+
+  var swiper = new swiper_dist_js_swiper_min_js__WEBPACK_IMPORTED_MODULE_0___default.a(".mySwiperThumb", {
+    spaceBetween: 10,
+    slidesPerView: 4,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      // 次に進むボタン（矢印）要素
+      prevEl: '.swiper-button-prev' // 前に戻るボタン（矢印）要素
+
+    }
+  });
+  var swiper2 = new swiper_dist_js_swiper_min_js__WEBPACK_IMPORTED_MODULE_0___default.a(".mySwiperMain", {
+    thumbs: {
+      swiper: swiper
+    },
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      // 間隔（ミリ秒）
+      disableOnInteraction: false // 操作されたら自動再生をストップさせる（true）設定（規定値true）
+
+    },
+    speed: 1000,
+    effect: 'fade'
+  });
+};
+
+
+
+/***/ }),
 
 /***/ "./src/_assets/js/index.js":
 /*!*********************************!*\
   !*** ./src/_assets/js/index.js ***!
   \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// import test from './utils/test';
-// import igarashi_san from './utils/igarashi_san';
-// import Person from './class/Person';
-// test.foo();
-// test.bar();
-// igarashi_san();
-// let es6 = new Person('ECMAScript 2015');
-// es6.sayHello();
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _class_swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./class/swiper */ "./src/_assets/js/class/swiper.js");
+/* harmony import */ var _class_micromodal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./class/micromodal */ "./src/_assets/js/class/micromodal.js");
+
+
+window.addEventListener('DOMContentLoaded', function () {
+  new _class_swiper__WEBPACK_IMPORTED_MODULE_0__["default"]();
+  new _class_micromodal__WEBPACK_IMPORTED_MODULE_1__["default"]();
+});
 
 /***/ })
 
