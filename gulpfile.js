@@ -175,7 +175,7 @@ gulp.task('copy', callback => {
   runSequence('clean:dist', 'copy:src', callback);
 });
 
-gulp.task('stylelint', ['clean:styles'], () => {
+gulp.task('stylelint', () => {
   return gulp.src([dir.src + '/_assets/scss/**/*.scss'])
     .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
     .pipe(postcss([
@@ -186,7 +186,7 @@ gulp.task('stylelint', ['clean:styles'], () => {
     .pipe(gulp.dest(dir.src + '/_assets/scss'));
 });
 
-gulp.task('styles', ['stylelint'], () => {
+gulp.task('styles', ['clean:styles', 'stylelint'], () => {
   return gulp.src([dir.src + '/_assets/scss/**/*.scss'])
     .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
     .pipe(sourcemaps.init())

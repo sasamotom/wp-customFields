@@ -1,0 +1,144 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.site2 {
+  .movieList {
+    display: flex;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+    gap: 1em 0.5%;
+    > li {
+      width: 33%;
+    }
+    .thumb {
+      cursor: pointer;
+      figure {
+        display: block;
+      }
+      figcaption {
+        margin-top: 0.3em;
+        font-size: 1.2rem;
+        text-align: center;
+        color: #666;
+      }
+    }
+  }
+  // モーダル
+  .c-modal {
+    display: none;
+    &.is-open {
+      display: block;
+    }
+    &_overlay {
+      position: fixed;
+      z-index: 1000; /* flipdeskのmodalが 100001 */
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow: hidden;
+      padding: 80px 15px 20px;
+      background: #fff;
+      @include mq(md) {
+        padding-top: 50px;
+      }
+    }
+    &_container {
+      position: relative;
+      max-width: 1920px;
+      margin: 0 auto;
+    }
+    &_close {
+      position: absolute;
+      top: -5rem;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      @include mq(md) {
+        top: -4rem;
+        width: 28px;
+        height: 28px;
+      }
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: block;
+        width: 53px;
+        height: 1px;
+        background: #555;
+        @include mq(md) {
+          width: 39px;
+        }
+      }
+      &::before {
+        transform: translate(-50%, -50%) rotate(45deg) ;
+      }
+      &::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+    .swiper-notification {
+      display: none;
+    }
+  }
+
+  .c-modal[aria-hidden='false'] .c-modal_overlay {
+    animation: mmfadeIn 0.25s cubic-bezier(0, 0, 0.2, 1);
+  }
+  .c-modal[aria-hidden='false'] .c-modal_container {
+    animation: mmfadeIn 0.5s cubic-bezier(0, 0, 0.2, 1);
+  }
+  .c-modal[aria-hidden='true'] .c-modal_overlay {
+    animation: mmfadeOut 0.25s cubic-bezier(0, 0, 0.2, 1);
+  }
+  .c-modal[aria-hidden='true'] .c-modal_container {
+    animation: mmfadeOut 0.5s cubic-bezier(0, 0, 0.2, 1);
+  }
+  @keyframes mmfadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes mmfadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  // 動画モーダル
+  .movieModal {
+    .c-modal_container {
+      position: relative;
+      max-width: 900px;
+      height: 100%;
+    }
+    .movieContainer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      overflow: hidden;
+      width: 100%;
+      height: 0;
+      max-height: 50vh;
+      padding-bottom: 56.25%; /*アスペクト比 16:9の場合の縦幅*/
+      transform: translate(-50%, -50%);
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+}
