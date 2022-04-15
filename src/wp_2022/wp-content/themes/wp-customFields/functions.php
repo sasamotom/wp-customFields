@@ -75,11 +75,8 @@ function shapeSpace_check_enum($redirect, $request) {
 // --------------------------------------------------------------
 function my_script_init() {
   wp_enqueue_style( 'style-name', get_theme_file_uri() . '/_assets/css/style.css', array(), '1.0.0', 'all' );
-  global $post;
-  $parent_id = get_page_parent( $post->post_parent );
-  $parent_slug = get_post($parent_id)->post_name;
   // site2の場合は、site2のCSSを読み込む
-  if ($parent_slug === 'site2') {
+  if (check_sub_site('site2')) {
     wp_enqueue_style( 'site2', get_theme_file_uri() . '/_assets/css/site2.css', array('style-name'), '1.0.0', 'all' );
   }
   // wp_enqueue_script( 'script-name', get_theme_file_uri() . '/_assets/js/script.js', array( 'jquery' ), '1.0.0', true );
@@ -411,11 +408,13 @@ function category_link_custom( $query = array()) {
   // 子カテゴリーの404を回避
   if (isset($query['category_name']) && strpos($query['category_name'], '/') === false && isset($query['name'])) {
     $parent_category = get_category_by_slug($query['category_name']);
-    $child_categories = get_categories('child_of='.$parent_category->term_id);
-    foreach ($child_categories as $child_category) {
-      if ($query['name'] === $child_category->category_nicename) {
-        $query['category_name'] = $query['category_name'].'/'.$query['name'];
-        unset($query['name']);
+    if ($parent_category) {
+      $child_categories = get_categories('child_of='.$parent_category->term_id);
+      foreach ($child_categories as $child_category) {
+        if ($query['name'] === $child_category->category_nicename) {
+          $query['category_name'] = $query['category_name'].'/'.$query['name'];
+          unset($query['name']);
+        }
       }
     }
   }
@@ -669,6 +668,20 @@ add_filter( 'mwform_custom_mail_tag', 'send_date_time', 10, 3 );
 // }
 // add_filter('preview_post_link', 'replace_preview_post_link');
 
+// --------------------------------------------------------------
+// 機能： サブディレクトリ内のサブサイトであるか調べる
+// 引数： $directory_name サブディレクトリ名を指定する
+// 戻値： true サブサイトである　 / false サブサイトではない
+// --------------------------------------------------------------
+function check_sub_site($directory_name) {
+  // URLの最初がサブサイトのディレクトリ名かどうかをチェックする
+  $this_page = str_replace(home_url(), '', get_the_permalink());
+  if (strpos($this_page, '/'.$directory_name) === 0) {
+    return true;
+  }
+  return false;
+}
+
 
 // ************************ カスタムフィールド **********************************************
 // --------------------------------------------------------------
@@ -676,5 +689,6 @@ add_filter( 'mwform_custom_mail_tag', 'send_date_time', 10, 3 );
 // --------------------------------------------------------------
 require_once ( 'acf/acf-faq.php' );
 require_once ( 'acf/acf-course.php' );
+require_once ( 'acf/acf-item.php' );
 
 ?>

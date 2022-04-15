@@ -19,10 +19,7 @@
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:ital@1&amp;text=0123456789AQSupportMEGThanksHeart&amp;display=swap"> -->
 </head>
 <body <?php body_class(); ?>>
-<?php
-$parent_id = get_page_parent( $post->post_parent );
-$parent_slug = get_post($parent_id)->post_name;
-if ($parent_slug === 'site2'): ?>
+<?php if (check_sub_site('site2')): ?>
 <!-- /site2/配下のサイト -->
 <header class="header">
   <div class="titleLogo">

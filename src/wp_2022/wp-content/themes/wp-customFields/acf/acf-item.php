@@ -1,0 +1,156 @@
+<?php
+//----------------------------------------------
+// カスタム投稿を定義
+//----------------------------------------------
+function create_post_type_item() {
+  $label = 'Item';
+  $slug = 'item';
+  $tax = 'cat_item';
+  $taxName = 'Itemカテゴリ';
+  $labels = [
+    'name' => $label,
+    'singular_name' => $label,
+    'all_items' => $label.'一覧',
+    'add_new_item' => $label.'を追加',
+    'add_new' => '新規追加',
+    'new_item' => $label,
+    'view_item' => $label.'を表示',
+    'not_found' => $label.'がありません',
+    'not_found_in_trash' => 'ゴミ箱に'.$label.'情報はありません。',
+    'search_items' => $label.'を検索',
+  ];
+  $args = [
+    'labels' => $labels,
+    'public' => true,
+    'show_ui' => true,
+    'query_var' => true,
+    'hierarchical' => true, // trueでカテゴリータイプ
+    'has_archive' => true,  // アーカイブページを有効にするかどうか。初期値: false
+    'update_count_callback' => '_update_post_term_count',
+    'menu_position' => 5,
+    'supports' => [
+      'title',
+      // 'editor',
+      'thumbnail',
+      'custom-fields',
+      // 'excerpt',
+      // 'author',
+      'revisions',
+      //'page-attributes',
+    ],
+    'rewrite' => ["slug" => "site2/item", "with_front" => false],
+  ];
+  register_post_type($slug, $args);
+
+  // カスタム投稿にカスタムタクソノミーを関連づける
+  register_taxonomy(
+    $tax,                 // タクソノミーの名前
+    $slug,                // このタクソノミーをこのカスタム投稿に設定する
+    array(
+      'labels' => array(
+        'name' => $taxName  // 管理画面で表示する分類名
+      ),
+      'hierarchical' => true,           // true  階層を持たせられる
+      'show_admin_column' => true,
+      'rewrite' => array('slug' => 'site2/item/category', 'with_front' => false)
+    )
+  );
+  register_taxonomy_for_object_type($tax, $slug);
+  register_taxonomy_for_object_type('post_tag', $slug); // 「投稿」のタグ
+  // register_taxonomy_for_object_type('category', $slug); // 「投稿」のカテゴリー
+}
+add_action( 'init', 'create_post_type_item' );
+
+//----------------------------------------------
+// アーカイブページにて、post_typeに今回のカスタム投稿タイプを追加する
+//----------------------------------------------
+function add_post_tag_archive_item( $wp_query ) {
+  if ($wp_query->is_main_query() && $wp_query->is_tag()) {
+    $wp_query->set( 'post_type', array('post','item'));
+  }
+}
+add_action( 'pre_get_posts', 'add_post_tag_archive_item');
+
+//----------------------------------------------
+// カテゴリーアーカイブにて、post_typeに今回のカスタム投稿タイプを追加する
+//----------------------------------------------
+function add_post_category_archive_item( $wp_query ) {
+  if ($wp_query->is_main_query() && $wp_query->is_category()) {
+  $wp_query->set( 'post_type', array('post','item'));
+  }
+}
+add_action( 'pre_get_posts', 'add_post_category_archive_item');
+
+//----------------------------------------------
+// カスタムタクソノミーを定義
+//----------------------------------------------
+function add_custom_taxonomies_term_filter_item() {
+  global $post_type;
+  if ( $post_type == 'item' ) {
+    $taxonomy = 'cat_item';
+    wp_dropdown_categories( array(
+      'show_option_all' => 'すべてのカテゴリー',
+      'orderby'         => 'name',
+      'selected'        => get_query_var( $taxonomy ),
+      'hide_empty'      => 0,
+      'name'            => $taxonomy,
+      'taxonomy'        => $taxonomy,
+      'value_field'     => 'slug',
+    ) );
+  }
+}
+add_action( 'restrict_manage_posts', 'add_custom_taxonomies_term_filter_item' );
+
+//----------------------------------------------
+// URLを変更したタクソノミーアーカイブページへアクセスできるようにする
+//----------------------------------------------
+function url_rewrite_rules() {
+  add_rewrite_rule('site2/item/category/([^/]+)/page/([0-9]+)/?$', 'index.php?cat_item=$matches[1]&paged=$matches[2]', 'top');
+  add_rewrite_rule('site2/item/category/([^/]+)/?$', 'index.php?cate_item=$matches[1]', 'top');
+}
+add_action( 'init', 'url_rewrite_rules' );
+//----------------------------------------------
+// カスタムタクソノミーのリンク調整
+//----------------------------------------------
+function rewrite_term_links($termlink, $term, $taxonomy) {
+  return ($taxonomy === 'news_cat' ? home_url('/site2/item/category/'. $term->slug) : $termlink);
+}
+add_filter( 'term_link', 'rewrite_term_links', 10, 3 );
+
+
+//----------------------------------------------
+// ショートコード
+//----------------------------------------------
+// TOPページ用よくある質問を取得（質問カテゴリが「TOPページに表示（slug==showtop）」のもの←これはWP管理画面から登録）
+// function getitemForTop($atts) {
+//   extract(shortcode_atts(array(
+//     // "num" => '3',         // 最新記事リストの取得数
+//     "cat" => 'item',       // 表示する記事のpost_type
+//     "tag" => '',
+//     "cat_item" => 'showtop'
+//   ), $atts));
+//   global $post;
+//   $oldpost = $post;
+//   // $myposts = get_posts('numberposts='.$num.'&order=asc&orderby=menu_order&post_type='.$cat.'&tag='.$tag);
+//   $myposts = get_posts('order=DESC&orderby=menu_order&post_type='.$cat.'&tag='.$tag .'&cat_item='.$cat_item);
+//   if (!$myposts) {
+//     return false;
+//   }
+//   else {
+//     $retHtml='<dl class="itemList">';
+//     foreach($myposts as $post) :
+//       $text_q = esc_html(get_field('text_q'));
+//       $text_a = get_field('text_a');
+//       // $post_id = get_the_ID();
+//       setup_postdata($post);
+//       $retHtml.='<dt class="itemList_q"><span>'.$text_q.'</span></dt>';
+//       $retHtml.='<dd class="itemList_a"><span>'.$text_a.'</span></dd>';
+//     endforeach;
+//     $retHtml.='</dl>';
+//     $post = $oldpost;
+//     wp_reset_postdata();
+//     return $retHtml;
+//   }
+// }
+// add_shortcode("itemForTop", "getitemForTop"); // [itemForTop]で呼び出せる
+?>
