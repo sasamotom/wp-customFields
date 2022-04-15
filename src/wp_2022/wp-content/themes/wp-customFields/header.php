@@ -19,9 +19,29 @@
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:ital@1&amp;text=0123456789AQSupportMEGThanksHeart&amp;display=swap"> -->
 </head>
 <body <?php body_class(); ?>>
+<?php
+$parent_id = get_page_parent( $post->post_parent );
+$parent_slug = get_post($parent_id)->post_name;
+if ($parent_slug === 'site2'): ?>
+<!-- /site2/配下のサイト -->
 <header class="header">
   <div class="titleLogo">
-    <a href="/"><img src="<?php echo site_url(); ?>/wp-content/uploads/logo.svg" alt="WP CustomFields" width="102" height="62" /></a>
+    <a href="/site2/"><img src="<?php echo home_url(); ?>/wp_2022/wp-content/uploads/2_logo.svg" alt="BrandLogo" width="102" height="62" /></a>
+  </div>
+  <nav class="gnav" id="gnav">
+    <ul class="gnavList">
+      <li><a href="<?php echo home_url(); ?>/site2/about/">About</a></li>
+      <li><a href="<?php echo home_url(); ?>/site2/news/">News</a></li>
+      <li><a href="<?php echo home_url(); ?>/site2/item/">Item</a></li>
+      <li><a href="<?php echo home_url(); ?>/site2/store/">Store list</a></li>
+    </ul>
+  </nav>
+</header>
+<?php else: ?>
+<!-- /配下のサイト -->
+<header class="header">
+  <div class="titleLogo">
+    <a href="/"><img src="<?php echo home_url(); ?>/wp-content/uploads/logo.svg" alt="WP CustomFields" width="102" height="62" /></a>
   </div>
   <nav class="gnav" id="gnav">
     <ul class="gnavList">
@@ -33,3 +53,4 @@
     </ul>
   </nav>
 </header>
+<?php endif; ?>

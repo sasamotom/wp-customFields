@@ -75,6 +75,13 @@ function shapeSpace_check_enum($redirect, $request) {
 // --------------------------------------------------------------
 function my_script_init() {
   wp_enqueue_style( 'style-name', get_theme_file_uri() . '/_assets/css/style.css', array(), '1.0.0', 'all' );
+  global $post;
+  $parent_id = get_page_parent( $post->post_parent );
+  $parent_slug = get_post($parent_id)->post_name;
+  // site2の場合は、site2のCSSを読み込む
+  if ($parent_slug === 'site2') {
+    wp_enqueue_style( 'site2', get_theme_file_uri() . '/_assets/css/site2.css', array('style-name'), '1.0.0', 'all' );
+  }
   // wp_enqueue_script( 'script-name', get_theme_file_uri() . '/_assets/js/script.js', array( 'jquery' ), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'my_script_init' );
