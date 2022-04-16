@@ -38,7 +38,7 @@
 <!-- /配下のサイト -->
 <header class="header">
   <div class="titleLogo">
-    <a href="/"><img src="<?php echo home_url(); ?>/wp-content/uploads/logo.svg" alt="WP CustomFields" width="102" height="62" /></a>
+    <a href="/"><img src="<?php echo home_url(); ?>/wp_2022/wp-content/uploads/logo.svg" alt="WP CustomFields" width="102" height="62" /></a>
   </div>
   <nav class="gnav" id="gnav">
     <ul class="gnavList">

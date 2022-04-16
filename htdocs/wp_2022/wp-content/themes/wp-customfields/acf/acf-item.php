@@ -121,38 +121,87 @@ add_filter( 'term_link', 'rewrite_term_links', 10, 3 );
 //----------------------------------------------
 // ショートコード
 //----------------------------------------------
-// TOPページ用よくある質問を取得（質問カテゴリが「TOPページに表示（slug==showtop）」のもの←これはWP管理画面から登録）
-// function getitemForTop($atts) {
-//   extract(shortcode_atts(array(
-//     // "num" => '3',         // 最新記事リストの取得数
-//     "cat" => 'item',       // 表示する記事のpost_type
-//     "tag" => '',
-//     "cat_item" => 'showtop'
-//   ), $atts));
-//   global $post;
-//   $oldpost = $post;
-//   // $myposts = get_posts('numberposts='.$num.'&order=asc&orderby=menu_order&post_type='.$cat.'&tag='.$tag);
-//   $myposts = get_posts('order=DESC&orderby=menu_order&post_type='.$cat.'&tag='.$tag .'&cat_item='.$cat_item);
-//   if (!$myposts) {
-//     return false;
-//   }
-//   else {
-//     $retHtml='<dl class="itemList">';
-//     foreach($myposts as $post) :
-//       $text_q = esc_html(get_field('text_q'));
-//       $text_a = get_field('text_a');
-//       // $post_id = get_the_ID();
-//       setup_postdata($post);
-//       $retHtml.='<dt class="itemList_q"><span>'.$text_q.'</span></dt>';
-//       $retHtml.='<dd class="itemList_a"><span>'.$text_a.'</span></dd>';
-//     endforeach;
-//     $retHtml.='</dl>';
-//     $post = $oldpost;
-//     wp_reset_postdata();
-//     return $retHtml;
-//   }
-// }
-// add_shortcode("itemForTop", "getitemForTop"); // [itemForTop]で呼び出せる
+// 最新アイテム
+function getNewItemList($atts) {
+  extract(shortcode_atts(array(
+    "num" => '4',         // 取得記事数
+    "cat" => 'item',       // 表示する記事のpost_type
+    "tag" => '',
+  ), $atts));
+  global $post;
+  $oldpost = $post;
+  $myposts = get_posts('numberposts='.$num.'&order=desc&orderby=date&post_type='.$cat.'&tag='.$tag);
+  if (!$myposts) {
+    return false;
+  }
+  else {
+    $retHtml='<section class="sec-Items">
+    <div class="container">
+      <h2 class="secTtl">最新アイテム</h2>
+      <ul class="itemList">';
+    foreach($myposts as $post) :
+      $images = get_field('images');
+      $imgPath = esc_url($images[0]);
+      $name  = esc_html(get_the_title("","",false));
+      $price  = esc_html(get_field('price'));
+      setup_postdata($post);
+      $retHtml.='<li><a href="'.esc_url(get_permalink()).'"><dl class="itemDtl">';
+      $retHtml.='<dd class="itemDtl_pic"><img src="'.$imgPath.'" alt="'.$name.'" width="400" height="400" loading="lazy" /></dd>';
+      $retHtml.='<dt class="itemDtl_name">'.$name.'</dt>';
+      $retHtml.='<dt class="itemDtl_price">'.$price.'</dt>';
+      $retHtml.='</dl></a></li>';
+    endforeach;
+    $retHtml.='</ul>
+      <p class="btn"><a href="/site2/item/">アイテム一覧へ</a></p>
+    </div>
+    </section>';
+    $post = $oldpost;
+    wp_reset_postdata();
+    return $retHtml;
+  }
+}
+add_shortcode("newItemList", "getNewItemList"); // [newItemList]で呼び出せる
+
+// 人気アイテム
+function getPopularItemList($atts) {
+  extract(shortcode_atts(array(
+    "num" => '4',         // 取得記事数
+    "cat" => 'item',       // 表示する記事のpost_type
+    "tag" => '',
+  ), $atts));
+  global $post;
+  $oldpost = $post;
+  $myposts = get_posts('numberposts='.$num.'&meta_key=good&order=desc&orderby=meta_value_num&post_type='.$cat.'&tag='.$tag);
+  if (!$myposts) {
+    return false;
+  }
+  else {
+    $retHtml='<section class="sec-Items">
+    <div class="container">
+      <h2 class="secTtl">人気アイテム</h2>
+      <ul class="itemList">';
+    foreach($myposts as $post) :
+      $images = get_field('images');
+      $imgPath = esc_url($images[0]);
+      $name  = esc_html(get_the_title("","",false));
+      $price  = esc_html(get_field('price'));
+      setup_postdata($post);
+      $retHtml.='<li><a href="'.esc_url(get_permalink()).'"><dl class="itemDtl">';
+      $retHtml.='<dd class="itemDtl_pic"><img src="'.$imgPath.'" alt="'.$name.'" width="400" height="400" loading="lazy" /></dd>';
+      $retHtml.='<dt class="itemDtl_name">'.$name.'</dt>';
+      $retHtml.='<dt class="itemDtl_price">'.$price.'</dt>';
+      $retHtml.='</dl></a></li>';
+    endforeach;
+    $retHtml.='</ul>
+      <p class="btn"><a href="/site2/item/">アイテム一覧へ</a></p>
+    </div>
+    </section>';
+    $post = $oldpost;
+    wp_reset_postdata();
+    return $retHtml;
+  }
+}
+add_shortcode("popularItemList", "getPopularItemList"); // [popularItemList]で呼び出せる
 
 // ***********************　いいねボタンの機能 ***********************
 //----------------------------------------------

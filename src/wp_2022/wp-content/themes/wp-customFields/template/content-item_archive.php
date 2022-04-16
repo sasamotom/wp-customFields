@@ -40,8 +40,8 @@
     $args = array(
       'posts_per_page' => 16,
       'paged' => $paged,
-      'orderby' => 'menu_order',
-      'order' => 'asc',
+      'orderby' => 'date',
+      'order' => 'desc',
       'post_type' => 'item',
       'post_status' => 'publish',
       'tax_query' => array(
@@ -67,8 +67,8 @@
     $args = array(
       'posts_per_page' => 16,
       'paged' => $paged,
-      'orderby' => 'menu_order',
-      'order' => 'asc',
+      'orderby' => 'date',
+      'order' => 'desc',
       'post_type' => 'item',
       'post_status' => 'publish'
     );
