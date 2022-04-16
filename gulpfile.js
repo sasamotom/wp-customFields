@@ -104,6 +104,7 @@ gulp.task('clean:dist', callback => {
     dir.dist + '/**/*.*',
     '!' + dir.dist + dir.wp + '/_assets/css/**/*.*',
     '!' + dir.dist + dir.wp + '/_assets/js/**/*.*',
+    '!' + dir.dist + dir.wp + '/_assets/ajax/**/*.*',
     '!' + dir.dist + dir.wpImg + '/**/*.*',
     '!' + dir.dist + dir.wp + '/**/*.php',
     '!' + dir.dist + '/**/*.html'
@@ -120,6 +121,7 @@ gulp.task('clean:styles', callback => {
 gulp.task('clean:scripts', callback => {
   return del([
     dir.dist + dir.wp + '/_assets/js/**/*.*',
+    dir.dist + dir.wp + '/_assets/ajax/**/*.*',
     dir.dist + dir.wp + '/_assets/sourcemaps/**/*.js.map'
   ], callback);
 });
@@ -146,6 +148,7 @@ gulp.task('copy:src', ['delete-empty'], () => {
     '!' + dir.src + '/_assets/scss/**/*.scss',
     '!' + dir.src + '/_assets/styl/**/*.styl',
     '!' + dir.src + '/_assets/js/**/*.js',
+    '!' + dir.src + '/_assets/ajax/**/*.js',
     '!' + dir.src + '/_assets/images/**/*.*',
     '!' + dir.src + '/**/*.php',
     '!' + dir.src + '/**/*.pug',
@@ -161,6 +164,7 @@ gulp.task('update', () => {
     '!' + dir.src + '/_assets/scss/**/*.scss',
     '!' + dir.src + '/_assets/styl/**/*.styl',
     '!' + dir.src + '/_assets/js/**/*.js',
+    '!' + dir.src + '/_assets/ajax/**/*.js',
     '!' + dir.src + '/_assets/images/**/*.*',
     '!' + dir.src + '/**/*.php',
     '!' + dir.src + '/**/*.pug',
@@ -228,6 +232,15 @@ gulp.task('scripts', () => {
       this.emit('end');
     })
     .pipe(gulp.dest(dir.dist + dir.wp + '/_assets/js'))
+    .pipe(bs.stream());
+});
+
+gulp.task('ajax', () => {
+  return gulp.src([
+    dir.src + '/_assets/ajax/[^_]*.js'
+  ])
+    .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
+    .pipe(gulp.dest(dir.dist + dir.wp + '/_assets/ajax'))
     .pipe(bs.stream());
 });
 
@@ -353,6 +366,12 @@ gulp.task('watch:scripts', () => {
   });
 });
 
+gulp.task('watch:ajax', () => {
+  return watch([dir.src + '/_assets/ajax/**/*.js'], () => {
+    return gulp.start(['ajax']);
+  });
+});
+
 gulp.task('watch:images', () => {
   return watch([dir.src + '/_assets/images/**/*.*'], () => {
     return gulp.start(['imagemin']);
@@ -383,6 +402,7 @@ gulp.task('watch:src', () => {
     '!' + dir.src + '/_assets/scss/**/*.scss',
     '!' + dir.src + '/_assets/styl/**/*.styl',
     '!' + dir.src + '/_assets/js/**/*.js',
+    '!' + dir.src + '/_assets/ajax/**/*.js',
     '!' + dir.src + '/_assets/images/**/*.*',
     '!' + dir.src + '/**/*.php',
     '!' + dir.src + '/**/*.pug',
@@ -392,7 +412,7 @@ gulp.task('watch:src', () => {
   });
 });
 
-gulp.task('watch', ['watch:styles', 'watch:scripts', 'watch:images', 'watch:html', 'watch:pug', 'watch:php', 'watch:src']);
+gulp.task('watch', ['watch:styles', 'watch:scripts', 'watch:ajax', 'watch:images', 'watch:html', 'watch:pug', 'watch:php', 'watch:src']);
 
 /**
  * Build Tasks
@@ -401,7 +421,7 @@ gulp.task('default', callback => {
   runSequence(
     ['clean:images', 'clean:scripts'],
     'copy',
-    ['styles', 'scripts', 'imagemin', 'pug', 'php'],
+    ['styles', 'scripts', 'ajax', 'imagemin', 'pug', 'php'],
     'browser-sync',
     'watch',
     callback);
@@ -411,7 +431,7 @@ gulp.task('build', callback => {
   runSequence(
     ['clean:images', 'clean:scripts'],
     'copy',
-    ['styles', 'scripts', 'imagemin', 'pug', 'php'],
+    ['styles', 'scripts', 'ajax', 'imagemin', 'pug', 'php'],
     // ['htmlmin', 'revision'],
     callback);
 });

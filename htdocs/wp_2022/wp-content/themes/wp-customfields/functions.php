@@ -682,6 +682,19 @@ function check_sub_site($directory_name) {
   return false;
 }
 
+// --------------------------------------------------------------
+// いいねボタンを使用するページでAjaxを使用可能とする
+// --------------------------------------------------------------
+function my_enqueue() {
+  if (is_singular('item') ) {
+    // Ajaxの処理を書いたjsの読み込み
+    wp_enqueue_script( 'ajax-script', get_theme_file_uri() . '/_assets/ajax/ajax.js', array('jquery'), null, true );
+    // 「ad_url.ajax_url」のようにしてURLを指定できるようになる
+    wp_localize_script( 'ajax-script', 'ad_url',array( 'ajax_url' => admin_url( 'admin-ajax.php') ) );
+  }
+}
+add_action( 'wp_enqueue_scripts', 'my_enqueue' );
+
 
 // ************************ カスタムフィールド **********************************************
 // --------------------------------------------------------------

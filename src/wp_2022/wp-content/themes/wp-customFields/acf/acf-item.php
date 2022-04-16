@@ -109,6 +109,7 @@ function url_rewrite_rules() {
   add_rewrite_rule('site2/item/category/([^/]+)/?$', 'index.php?cate_item=$matches[1]', 'top');
 }
 add_action( 'init', 'url_rewrite_rules' );
+
 //----------------------------------------------
 // カスタムタクソノミーのリンク調整
 //----------------------------------------------
@@ -116,7 +117,6 @@ function rewrite_term_links($termlink, $term, $taxonomy) {
   return ($taxonomy === 'news_cat' ? home_url('/site2/item/category/'. $term->slug) : $termlink);
 }
 add_filter( 'term_link', 'rewrite_term_links', 10, 3 );
-
 
 //----------------------------------------------
 // ショートコード
@@ -153,4 +153,87 @@ add_filter( 'term_link', 'rewrite_term_links', 10, 3 );
 //   }
 // }
 // add_shortcode("itemForTop", "getitemForTop"); // [itemForTop]で呼び出せる
+
+// ***********************　いいねボタンの機能 ***********************
+//----------------------------------------------
+// いいねボタンのクッキーがあるかどうか確かめる
+// 戻値： true クッキー有, false: クッキー無
+//----------------------------------------------
+function checkHasCookie($post_id) {
+  $ret = false;
+  if (isset($_COOKIE['good']) && array_key_exists($post_id, $_COOKIE['good'])) {
+    $ret = true;
+  }
+  return $ret;
+}
+
+//----------------------------------------------
+// いいねボタン表示（ショートコード）
+//----------------------------------------------
+function getGoodBtn() {
+  // ACFプラグインが無効化されている（get_field等が使えない）場合は何もしない
+  if (!function_exists('get_field')) {
+    return;
+  }
+
+  $FIELD_KEY = 'good';
+  global $post;
+  $postID = $post->ID;
+  $count = get_field($FIELD_KEY, $postID);
+
+  if (!$count) {
+    // いいね数が取得できない場合は、初期値として0をセット
+    update_field($FIELD_KEY, 0, $postID);
+    $count = get_field($FIELD_KEY, $postID);
+  }
+
+  $btnClass = 'goodBtn';  // いいねボタンのクラス
+  $btnCaption = 'Good';   // いいねボタンのキャプション
+  if (checkHasCookie($postID)) {
+    // いいね済みの場合
+    $btnClass = $btnClass . ' -clicked';
+  }
+  $html = '<div class="goodBtnContainer"><button type="button" id="goodBtn" class="'.$btnClass.'" data-id="'.$postID.'">'.$btnCaption.'</button><p class="goodCnt">いいね <span id="goodCntNum">'.$count.'</span>件</p></div>';
+
+  return $html;
+}
+add_shortcode('goodBtnArea', 'getGoodBtn'); // [goodBtnArea]で呼び出せる
+
+//----------------------------------------------
+// いいね数カウント処理（いいねボタン押下時に呼び出される）
+//----------------------------------------------
+function count_up() {
+  // postIDないときはなにもしない
+  if (!isset($_POST['postID'])) {
+    return;
+  }
+  // get_field等が使えない場合は何もしない
+  if(!function_exists('get_field')) {
+    return;
+  }
+
+  $FIELD_KEY = 'good';
+  $postID = $_POST['postID']; //投稿ID
+  $count = (int)get_field($FIELD_KEY, $postID); // いいね数
+
+  if (checkHasCookie($postID)) {
+    // 【いいね済みの場合】
+    if($count > 0){
+      update_field($FIELD_KEY, $count - 1, $postID);
+    }
+    setcookie('good['.$postID.']', false, time() - 30, '/'); // Cookieから該当の投稿情報を削除
+  }
+  else {
+    // 【未いいねの場合】
+    update_field($FIELD_KEY, $count + 1, $postID);
+    setcookie('good['.$postID.']', $postID, time() + 60 * 60 * 24 * 30, '/'); //いいねした投稿情報をCookieに保存
+  }
+
+  // 新しいカウント数を返却する
+  echo get_field($FIELD_KEY, $postID);
+  die();  // die()を呼び出さないと、返り値の値の最後に「0」が付く
+}
+add_action( 'wp_ajax_count_up', 'count_up' );// ログインしているユーザー向け関数
+add_action( 'wp_ajax_nopriv_count_up', 'count_up' );// 非ログインユーザー用関数
+
 ?>

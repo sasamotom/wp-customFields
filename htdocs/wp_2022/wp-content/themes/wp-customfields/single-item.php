@@ -11,6 +11,8 @@
   $content = get_the_content('', '', false);
 ?>
 
+
+
 <main id="main" class="site2">
   <div class="pageTtlContainer item">
     <div class="container">
@@ -72,12 +74,18 @@ if ( have_posts() ) :
           <dd class="itemData_table">
             <dl class="itemTbl">
               <?php $group_field = get_field('detail'); ?>
+              <?php if (!empty(esc_html($group_field['size']))) : ?>
               <dt>サイズ</dt>
               <dd><?php echo esc_html($group_field['size']); ?></dd>
+              <?php endif; ?>
+              <?php if (!empty(esc_html($group_field['launch']))) : ?>
               <dt>発売日</dt>
               <dd><?php echo esc_html($group_field['launch']); ?></dd>
+              <?php endif; ?>
+              <?php if (!empty(esc_html($group_field['price']))) : ?>
               <dt>価格</dt>
               <dd><?php echo esc_html($group_field['price']); ?></dd>
+              <?php endif; ?>
             </dl>
           </dd>
           <dd class="itemData_tag">
@@ -100,10 +108,7 @@ if ( have_posts() ) :
           </dd>
         </div>
       </dl>
-      <div class="goodBtnContainer">
-        <button class="goodBtn">Good</button>
-        <p class="goodCnt">いいね <span><?php echo get_field('good'); ?></span>件</p>
-      </div>
+      <?php echo do_shortcode('[goodBtnArea]'); ?>
 
       <ul class="itemStory">
 <?php
