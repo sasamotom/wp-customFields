@@ -12,7 +12,7 @@
 ?>
 
 <main id="main">
-  <div class="pageTtlContainer">
+  <div class="pageTtlContainer blog">
     <div class="container">
       <h1 class="pageTtl"><?php echo $title ?></h1>
     </div>

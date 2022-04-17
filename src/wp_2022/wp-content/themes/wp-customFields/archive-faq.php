@@ -8,7 +8,7 @@
 ?>
 
 <main id="main">
-  <div class="pageTtlContainer">
+  <div class="pageTtlContainer faq">
     <div class="container">
       <h1 class="pageTtl"><?php echo $cat_name; ?></h1>
     </div>

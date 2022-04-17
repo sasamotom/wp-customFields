@@ -31,7 +31,7 @@ function create_post_type_course() {
     'supports' => [
       'title',
       // 'editor',
-      // 'thumbnail',
+      'thumbnail',
       'custom-fields',
       // 'excerpt',
       // 'author',

@@ -9,7 +9,7 @@
 ?>
 
 <main id="main">
-  <div class="pageTtlContainer">
+  <div class="pageTtlContainer course">
     <div class="container">
       <h1 class="pageTtl"><?php echo $title ?></h1>
     </div>
@@ -41,8 +41,8 @@ if ( have_posts() ) :
         <li><img src="<?php echo $imgPath ?>" alt="<?php echo $title ?>" <?php echo get_image_size($imgPath) ?> loading="lazy" /></li>
     <?php endif; ?>
       </ul>
-      <ul class="courseInfo">
     <?php if (!empty (esc_html(get_field('course_name')))) : ?>
+      <ul class="courseInfo">
         <li>
           <h3 class="courseInfo_ttl"><?php echo esc_html(get_field('course_name')) ?></h3>
       <?php if (!empty (get_field('course_description'))) : ?>
@@ -64,10 +64,37 @@ if ( have_posts() ) :
       <?php endif; ?>
           </ul>
           <?php echo get_field('course_table') ?>
-          <p class="btn"><a href="/apply/?<?php echo $title ?>+<?php esc_html(get_field('course_name')) ?>">講座申込はこちら</a></p>
+          <p class="btn"><a href="/apply/?<?php echo $title ?>+<?php echo esc_html(get_field('course_name')) ?>">講座申込はこちら</a></p>
         </li>
-    <?php endif; ?>
       </ul>
+    <?php endif; ?>
+    <?php if (!empty (esc_html(get_field('course2_name')))) : ?>
+      <ul class="courseInfo">
+        <li>
+          <h3 class="courseInfo_ttl"><?php echo esc_html(get_field('course2_name')) ?></h3>
+      <?php if (!empty (get_field('course2_description'))) : ?>
+          <p><?php echo get_field('course2_description') ?></p>
+      <?php endif; ?>
+          <p class="courseInfo_samplePicTtl">作品見本</p>
+          <ul class="courseInfo_pic">
+      <?php $imgPath = esc_url(get_field('course2_img01'));
+      if (!empty ($imgPath)) : ?>
+            <li><img src="<?php echo $imgPath ?>" alt="<?php echo $title ?>" <?php echo get_image_size($imgPath) ?> loading="lazy" /></li>
+      <?php endif; ?>
+      <?php $imgPath = esc_url(get_field('course2_img02'));
+      if (!empty ($imgPath)) : ?>
+            <li><img src="<?php echo $imgPath ?>" alt="<?php echo $title ?>" <?php echo get_image_size($imgPath) ?> loading="lazy" /></li>
+      <?php endif; ?>
+      <?php $imgPath = esc_url(get_field('course2_img03'));
+      if (!empty ($imgPath)) : ?>
+            <li><img src="<?php echo $imgPath ?>" alt="<?php echo $title ?>" <?php echo get_image_size($imgPath) ?> loading="lazy" /></li>
+      <?php endif; ?>
+          </ul>
+          <?php echo get_field('course2_table') ?>
+          <p class="btn"><a href="/apply/?<?php echo $title ?>+<?php echo esc_html(get_field('course2_name')) ?>">講座申込はこちら</a></p>
+        </li>
+      </ul>
+    <?php endif; ?>
 <?php
   endwhile;
 else :

@@ -8,7 +8,7 @@
 ?>
 
 <main id="main">
-  <div class="pageTtlContainer">
+  <div class="pageTtlContainer course">
     <div class="container">
       <h1 class="pageTtl"><?php echo $cat_name; ?></h1>
     </div>
@@ -18,6 +18,20 @@
       <?php breadcrumb(); ?>
     </div>
   </div>
+  <section class="sec-aboutPastel">
+    <div class="container">
+      <h2 class="secTtl">講座について</h2>
+      <div class="textContainer">
+        <div class="txts">
+          <h3 class="txts_ttl">複数講座から選べる</h3>
+          <p>初めての方でも簡単に楽しめる講座やインストラクター養成講座など、４講座ご用意しております。<br>一部講座は、WEBでも受講可能です。<br>初めての方には、お好きな絵を選んでいただくパステルアート講座がおすすめです。</p>
+        </div>
+        <div class="pic">
+          <img src="/wp_2022/wp-content/uploads/img024.jpg" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
 <?php
   if (have_posts()) :
     while(have_posts()):
@@ -26,7 +40,7 @@
     endwhile;
   endif;
 ?>
-  <section class="sec-courseList">
+  <section class="sec-courseList" id="list">
     <div class="container">
       <h2 class="secTtl">開催中の講座</h2>
 <?php
@@ -47,17 +61,22 @@
       $linkPath = esc_url(get_permalink());
       $name = esc_html(get_the_title("","",false));
       $description = get_field('description');
-      $imgPath = esc_url(get_field('img01'));
-      if (empty($imgPath)) {
-        $imgPath = esc_url(get_field('course_img01'));
-      }
 ?>
       <li>
         <dl class="courseDtl">
-      <?php if (!empty($imgPath)) : ?>
-          <dd class="courseDtl_pic"><img src="<?php echo $imgPath ?>" alt="<?php echo $name ?>" <?php echo get_image_size($imgPath) ?> loading="lazy" /></dd>
-      <?php else : ?>
-          <dd class="courseDtl_pic"><img src="<?php echo site_url(); ?>/wp-content/uploads/default.jpg" alt="no image" width="800" height="500" loading="lazy" /></dd>
+      <?php if (has_post_thumbnail()) : ?>
+          <dd class="courseDtl_pic"><?php the_post_thumbnail(); ?></dd>
+      <?php else :
+        $imgPath = esc_url(get_field('img01'));
+        if (empty($imgPath)) {
+          $imgPath = esc_url(get_field('course_img01'));
+        }
+      ?>
+        <?php if (!empty($imgPath)) : ?>
+            <dd class="courseDtl_pic"><img src="<?php echo $imgPath ?>" alt="<?php echo $name ?>" <?php echo get_image_size($imgPath) ?> loading="lazy" /></dd>
+        <?php else : ?>
+            <dd class="courseDtl_pic"><img src="<?php echo site_url(); ?>/wp-content/uploads/default.jpg" alt="no image" width="800" height="500" loading="lazy" /></dd>
+        <?php endif; ?>
       <?php endif; ?>
           <div class="courseDtl_col2">
             <dt class="courseDtl_name"><?php echo $name ?></dt>

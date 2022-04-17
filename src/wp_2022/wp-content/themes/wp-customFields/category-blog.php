@@ -8,7 +8,7 @@
 <!-- <h1 class="underTitle h1_seminar"><?php echo esc_html($cat_name); ?></h1> -->
 
 <main id="main">
-  <div class="pageTtlContainer">
+  <div class="pageTtlContainer blog">
     <div class="container">
       <h1 class="pageTtl">BLOG</h1>
     </div>

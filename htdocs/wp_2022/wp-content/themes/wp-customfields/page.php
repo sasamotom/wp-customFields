@@ -17,7 +17,7 @@
     </div>
   </div>
 <?php else : ?>
-  <div class="pageTtlContainer">
+  <div class="pageTtlContainer <?php echo $slug ?>">
     <div class="container">
       <h1 class="pageTtl"><?php the_title(); ?></h1>
     </div>

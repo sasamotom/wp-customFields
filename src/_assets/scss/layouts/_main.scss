@@ -43,7 +43,9 @@ main:not(.site2) {
   &.blog::before {
     background-image: url(/wp_2022/wp-content/uploads/h_blog.jpg);
   }
-  &.apply::before {
+  &.apply::before,
+  &.confirm::before,
+  &.complete::before {
     background-image: url(/wp_2022/wp-content/uploads/h_apply.jpg);
   }
   .pageTtl {

@@ -31,6 +31,7 @@
       <li><a href="<?php echo home_url(); ?>/site2/news/">News</a></li>
       <li><a href="<?php echo home_url(); ?>/site2/item/">Item</a></li>
       <li><a href="<?php echo home_url(); ?>/site2/store/">Store list</a></li>
+      <li><a href="<?php echo home_url(); ?>/site2/feature_story/">Feature story</a></li>
     </ul>
   </nav>
 </header>
@@ -43,7 +44,7 @@
   <nav class="gnav" id="gnav">
     <ul class="gnavList">
       <li><a href="<?php echo home_url(); ?>/about/">パステルアートについて</a></li>
-      <li><a href="<?php echo home_url(); ?>/course/">講座一覧</a></li>
+      <li><a href="<?php echo home_url(); ?>/course/">講座</a></li>
       <li><a href="<?php echo home_url(); ?>/faq/">よくある質問</a></li>
       <li><a href="<?php echo home_url(); ?>/blog/">BLOG</a></li>
       <li class="btn"><a href="<?php echo home_url(); ?>/apply/">講座申込</a></li>
