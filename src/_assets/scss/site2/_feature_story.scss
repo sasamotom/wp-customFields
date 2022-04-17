@@ -20,9 +20,15 @@
           object-fit: cover;
         }
       }
+      &_txts {
+        flex-grow: 1;
+        margin-left: 2em;
+      }
+      &_date {
+        font-size: 90%;
+      }
       &_name {
         width: fit-content;
-        margin-left: 2em;
         font-size: 110%;
         &::after {
           content: "";

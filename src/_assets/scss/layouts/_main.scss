@@ -2,6 +2,11 @@
 @use "../settings/variables" as *;
 @use "sass:math";
 
+main:not(.site2) {
+  background: rgb(233,251,252);
+  background: linear-gradient(90deg, rgba(233,251,252,1) 0%, rgba(244,248,254,1) 50%, rgba(233,251,252,1) 100%);
+}
+
 
 [class^="sec-"],
 [class*=" sec-"] {
@@ -10,25 +15,66 @@
 }
 
 .pageTtlContainer {
-  padding: 8rem 0 2rem;
-  .pageTtl {
-    font-size: 2.5rem;
-    &::first-letter {
-      padding: 1rem;
-      font-size:150%;
-      color: #fff;
-      background: $color01;
+  position: relative;
+  z-index: 1;
+  padding: 7rem 0 0;
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 7rem;
+    right: 0;
+    display: block;
+    width: calc(100% - 15rem);
+    max-width: calc(50% + 35rem);
+    height: calc(100% - 8rem);
+    background: url(/wp_2022/wp-content/uploads/h_about.jpg) center center / cover;
+    @include mq() {
+      width: 100%;
+      height: 150%;
     }
+  }
+  &.course::before {
+    background-image: url(/wp_2022/wp-content/uploads/h_course.jpg);
+  }
+  &.faq::before {
+    background-image: url(/wp_2022/wp-content/uploads/h_faq.jpg);
+  }
+  &.blog::before {
+    background-image: url(/wp_2022/wp-content/uploads/h_blog.jpg);
+  }
+  &.apply::before {
+    background-image: url(/wp_2022/wp-content/uploads/h_apply.jpg);
+  }
+  .pageTtl {
+    display: flex;
+    width: 28rem;
+    padding: 0 .5em;
+    font-size: 2rem;
+    transform: translate(-1.5em, 50%);
+    text-align: center;
+    letter-spacing: -0.02em;
+    background: #f8fbfe;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+    @include mq() {
+      aspect-ratio: auto;
+      display: inline-block;
+      padding: 0.5em 1em;
+    }
+
   }
 }
 
 .breadcrumbContainer {
   .breadcrumb {
     display: flex;
-    align-items: center;
+    padding-bottom: 10rem;
     font-size: 1.3rem;
-    justify-content: flex-end;
     list-style-type: none;
+    align-items: center;
+    justify-content: flex-end;
     &_item {
       + .breadcrumb_item {
         display: flex;
@@ -53,15 +99,50 @@
 
 .secTtl {
   position: relative;
-  padding-bottom: 0.3em;
+  z-index: 1;
+  padding-bottom: 2em;
   font-size: 2rem;
-  border-bottom: solid 3px rgba($color01, 0.3);
   &::after {
-    content: " ";
+    content: "";
     position: absolute;
-    bottom: -3px;
+    z-index: -1;
+    bottom: 2.1em;
+    left: -.5em;
     display: block;
-    width: 10%;
-    border-bottom: solid 3px $color01;
+    width: 1em;
+    height: 1em;
+    background: #fff;
+  }
+}
+
+.textContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem 0;
+  @include mq() {
+    flex-direction: column;
+  }
+  .txts {
+    width: 48%;
+    @include mq() {
+      width: 100%;
+    }
+    &_ttl {
+      font-size: 120%;
+      + p {
+        margin-top: 2em;
+      }
+    }
+    p + .txts_ttl {
+      margin-top: 3em;
+    }
+  }
+  .pic {
+    width: 50%;
+    @include mq() {
+      width: 100%;
+    }
   }
 }
