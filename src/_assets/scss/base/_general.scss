@@ -31,7 +31,17 @@
 .-mincho {
   font-family: $fontMincho!important;
 }
-
+.-sp {
+  display: none;
+  @include mq() {
+    display: initial;
+  }
+}
+.-pc {
+  @include mq() {
+    display: none;
+  }
+}
 
 // .-ib {
 //   display: inline-block;

@@ -3,31 +3,26 @@
 
 .p-course {
   .courseList {
-    flex-direction: column;
-    margin-top: 3rem;
+    gap: 5rem 4%;
     > li {
-      width: 100%;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid #eee;
+      width: 48%;
+      background: #fff;
+      @include mq() {
+        width: 100%;
+      }
     }
-  }
-  .courseDtl {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    &_pic {
-      width: 25%;
-    }
-    &_name {
-      margin-top: 0;
-      font-weight: bold;
-      text-align: left;
-    }
-    &_txt {
-      margin-top: 1em;
-    }
-    &_col2 {
-      width: 72%;
+    .courseDtl {
+      display: flex;
+      flex-direction: column-reverse;
+      &_col2{
+        padding: 2em;
+        @include mq() {
+          padding: 1em;
+        }
+      }
+      &_txt {
+        margin-top: 2em;
+      }
     }
   }
 }
@@ -74,7 +69,7 @@
       th {
         text-align: center;
         color: #fff;
-        background: $color01
+        background: $color01;
       }
     }
     &_samplePicTtl {

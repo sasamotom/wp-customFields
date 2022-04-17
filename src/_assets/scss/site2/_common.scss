@@ -84,6 +84,7 @@ body {
     border: none;
     &::after {
       content: "";
+      position: static;
       display: block;
       width: 100%;
       height: 2px;
@@ -200,11 +201,15 @@ body {
     &::before {
       content: "";
       position: absolute;
+      top: auto;
+      right: auto;
       bottom: 0;
       left: 0;
       display: block;
       width: 100%;
+      max-width: none;
       height: 60%;
+      transform: none;
       background: rgb(255,255,255);
       background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
     }
@@ -217,6 +222,9 @@ body {
     }
     &.store {
       background-image: url(/wp_2022/wp-content/uploads/2_img09.jpg);
+    }
+    &.feature_story {
+      background-image: url(/wp_2022/wp-content/uploads/2_img10.jpg);
     }
     .site2PageTtl {
       font-size: 4rem;

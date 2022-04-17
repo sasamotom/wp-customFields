@@ -33,12 +33,13 @@
 html,
 body {
   -webkit-text-size-adjust: 100%;
+  height: 100%;
 }
 
 html {
   font-size: 62.5%;
   @include mq() {
-    font-size: 50%;
+    font-size: 57%;
   }
 }
 

@@ -1,19 +1,42 @@
 @use "../settings/mixins" as *;
 @use "../settings/variables" as *;
 
-.p-about {
-  p {
-    margin-top: 2em;
-    + p {
-      margin-top: 1em;
-    }
+.sec-aboutPastel {
+}
+.sec-aboutTools {
+  position: relative;
+  z-index: 1;
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: 5%;
+    bottom: 2rem;
+    display: block;
+    width: 10%;
+    max-width: 100px;
+    padding-top: 51%;
+    background: #000;
+    background: url(/wp_2022/wp-content/uploads/img023.png) center bottom / contain no-repeat;
   }
-  .picContainer {
+  .toolList {
     display: flex;
-    margin-top: 5rem;
-    justify-content: space-between;
-    img {
-      width: 32%;
+    margin-top: 6rem;
+    gap: 2rem 0;
+    flex-wrap: wrap;
+    > li {
+      width: 50%;
+    }
+    .toolDtl {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &_pic {
+        width: 30%;
+      }
+      &_name {
+        width: 65%;
+      }
     }
   }
 }
