@@ -127,6 +127,7 @@ function getNewItemList($atts) {
     "num" => '4',         // 取得記事数
     "cat" => 'item',       // 表示する記事のpost_type
     "tag" => '',
+    "ttl" => '最新アイテム',
   ), $atts));
   global $post;
   $oldpost = $post;
@@ -135,9 +136,12 @@ function getNewItemList($atts) {
     return false;
   }
   else {
+
     $retHtml='<section class="sec-Items">
     <div class="container">
-      <h2 class="secTtl">最新アイテム</h2>
+      <h2 class="secTtl">';
+      $retHtml.=$ttl;
+      $retHtml.='</h2>
       <ul class="itemList">';
     foreach($myposts as $post) :
       $images = get_field('images');

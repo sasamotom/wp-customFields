@@ -17,6 +17,12 @@
 <?php wp_head(); ?>
   <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:ital@1&amp;text=0123456789AQSupportMEGThanksHeart&amp;display=swap"> -->
+<?php if( is_user_logged_in() ) : ?>
+  <!-- WPにログインしている場合はヘッダーをWP管理バー分（32px）下にずらす -->
+  <style type="text/css">
+    .header { margin-top: 32px; }
+  </style>
+<?php endif; ?>
 </head>
 <body <?php body_class(); ?>>
 <?php if (check_sub_site('site2')): ?>
