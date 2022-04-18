@@ -753,22 +753,27 @@ body {
   -ms-flex-negative: 0;
   flex-shrink: 0
 }
+.site2 .newsList_date + .newsList_tag {
+  margin-left: 1em
+}
 .site2 .newsList_tag {
   display: inline-block;
-  margin-left: 1em;
   padding: 0 0.5em;
   font-size: 70%;
   letter-spacing: -0.1em;
   -ms-flex-negative: 0;
   flex-shrink: 0
 }
-.site2 .newsList_tag.cate01 {
+.site2 .newsList_tag + .newsList_tag {
+  margin-left: 1em
+}
+.site2 .newsList_tag.release {
   background: #f6c6c7
 }
-.site2 .newsList_tag.cate02 {
+.site2 .newsList_tag.campaign {
   background: #fff3d7
 }
-.site2 .newsList_tag.cate03 {
+.site2 .newsList_tag.notice {
   border: 1px solid #f3f3f3
 }
 .site2 .newsList_txt {

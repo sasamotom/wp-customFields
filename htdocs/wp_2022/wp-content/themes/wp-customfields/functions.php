@@ -281,6 +281,13 @@ function pagename_class($classes) {
   if (wp_is_mobile()) {
     $classes[] .= 'mobile'; //mobileの場合classを追加
   }
+  // どのサイトであるかの判断用
+  if (check_sub_site('site2')) {
+    $classes[] = 's-site2';
+  }
+  else {
+    $classes[] = 's-main';
+  }
   //$classes[] .= '任意のクラス名'; //その他必要なクラス名があれば追加
   return $classes;
 }
@@ -703,5 +710,6 @@ add_action( 'wp_enqueue_scripts', 'my_enqueue' );
 require_once ( 'acf/acf-faq.php' );
 require_once ( 'acf/acf-course.php' );
 require_once ( 'acf/acf-item.php' );
+require_once ( 'acf/acf-news.php' );
 
 ?>

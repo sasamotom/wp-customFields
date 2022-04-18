@@ -104,19 +104,19 @@ add_action( 'restrict_manage_posts', 'add_custom_taxonomies_term_filter_item' );
 //----------------------------------------------
 // URLを変更したタクソノミーアーカイブページへアクセスできるようにする
 //----------------------------------------------
-function url_rewrite_rules() {
+function url_rewrite_rules_item() {
   add_rewrite_rule('site2/item/category/([^/]+)/page/([0-9]+)/?$', 'index.php?cat_item=$matches[1]&paged=$matches[2]', 'top');
   add_rewrite_rule('site2/item/category/([^/]+)/?$', 'index.php?cate_item=$matches[1]', 'top');
 }
-add_action( 'init', 'url_rewrite_rules' );
+add_action( 'init', 'url_rewrite_rules_item' );
 
 //----------------------------------------------
 // カスタムタクソノミーのリンク調整
 //----------------------------------------------
-function rewrite_term_links($termlink, $term, $taxonomy) {
+function rewrite_term_links_item($termlink, $term, $taxonomy) {
   return ($taxonomy === 'news_cat' ? home_url('/site2/item/category/'. $term->slug) : $termlink);
 }
-add_filter( 'term_link', 'rewrite_term_links', 10, 3 );
+add_filter( 'term_link', 'rewrite_term_links_item', 10, 3 );
 
 //----------------------------------------------
 // ショートコード
@@ -148,7 +148,7 @@ function getNewItemList($atts) {
       $retHtml.='<li><a href="'.esc_url(get_permalink()).'"><dl class="itemDtl">';
       $retHtml.='<dd class="itemDtl_pic"><img src="'.$imgPath.'" alt="'.$name.'" width="400" height="400" loading="lazy" /></dd>';
       $retHtml.='<dt class="itemDtl_name">'.$name.'</dt>';
-      $retHtml.='<dt class="itemDtl_price">'.$price.'</dt>';
+      $retHtml.='<dd class="itemDtl_price">'.$price.'</dd>';
       $retHtml.='</dl></a></li>';
     endforeach;
     $retHtml.='</ul>
@@ -189,7 +189,7 @@ function getPopularItemList($atts) {
       $retHtml.='<li><a href="'.esc_url(get_permalink()).'"><dl class="itemDtl">';
       $retHtml.='<dd class="itemDtl_pic"><img src="'.$imgPath.'" alt="'.$name.'" width="400" height="400" loading="lazy" /></dd>';
       $retHtml.='<dt class="itemDtl_name">'.$name.'</dt>';
-      $retHtml.='<dt class="itemDtl_price">'.$price.'</dt>';
+      $retHtml.='<dd class="itemDtl_price">'.$price.'</dd>';
       $retHtml.='</dl></a></li>';
     endforeach;
     $retHtml.='</ul>
@@ -202,6 +202,40 @@ function getPopularItemList($atts) {
   }
 }
 add_shortcode("popularItemList", "getPopularItemList"); // [popularItemList]で呼び出せる
+
+// liタグの中身を取得する
+function getInnerLiOfItem($atts) {
+  $atts = shortcode_atts(
+    array(
+      'id' => '0',
+    ),
+  $atts);
+  global $post;
+  $oldpost = $post;
+  $postId = $atts['id'] ;
+
+  $mypost = get_post($postId);
+  if (!$mypost) {
+    return false;
+  }
+  $post = $mypost;
+  $retHtml='';
+  $images = get_field('images');
+  $imgPath = esc_url($images[0]);
+  $name  = esc_html(get_the_title("","",false));
+  $price  = esc_html(get_field('price'));
+  setup_postdata($post);
+  $retHtml.='<a href="'.esc_url(get_permalink()).'"><dl class="itemDtl">';
+  $retHtml.='<dd class="itemDtl_pic"><img src="'.$imgPath.'" alt="'.$name.'" width="400" height="400" loading="lazy" /></dd>';
+  $retHtml.='<dt class="itemDtl_name">'.$name.'</dt>';
+  $retHtml.='<dd class="itemDtl_price">'.$price.'</dd>';
+  $retHtml.='</dl></a>';
+
+  $post = $oldpost;
+  wp_reset_postdata();
+  return $retHtml;
+}
+add_shortcode("InnerLiOfItem", "getInnerLiOfItem"); // [InnerLiOfItem id="999"]で呼び出せる
 
 // ***********************　いいねボタンの機能 ***********************
 //----------------------------------------------

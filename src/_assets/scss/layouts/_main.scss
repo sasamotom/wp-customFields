@@ -2,7 +2,7 @@
 @use "../settings/variables" as *;
 @use "sass:math";
 
-main:not(.site2) {
+body.s-main {
   background: rgb(233,251,252);
   background: linear-gradient(90deg, rgba(233,251,252,1) 0%, rgba(244,248,254,1) 50%, rgba(233,251,252,1) 100%);
 }

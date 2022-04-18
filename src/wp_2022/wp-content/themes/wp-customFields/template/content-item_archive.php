@@ -25,6 +25,10 @@
         <li><span>全て</span></li>
 <?php endif; ?>
 <?php
+  $args = array(
+    'orderby'       => 'menu_order',
+    'order'         => 'DESC',
+  );
   $terms = get_terms('cat_item', $args);    // タクソノミーの指定
   if (is_tax()) {
     $ex_term = get_queried_object();          // 現在選択中のタクソノミー

@@ -125,21 +125,26 @@ body {
     }
     &_date {
       flex-shrink: 0;
+      + .newsList_tag {
+        margin-left: 1em;
+      }
     }
     &_tag {
       display: inline-block;
-      margin-left: 1em;
       padding: 0 0.5em;
       font-size: 70%;
       letter-spacing: -.1em;
       flex-shrink: 0;
-      &.cate01 {
+      + .newsList_tag {
+        margin-left: 1em;
+      }
+      &.release {
         background: $color03;
       }
-      &.cate02 {
+      &.campaign {
         background: $color02;
       }
-      &.cate03 {
+      &.notice {
         border: 1px solid #f3f3f3;
       }
     }

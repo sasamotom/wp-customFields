@@ -863,7 +863,7 @@ a .courseDtl:hover .courseDtl_name {
 .gnavList .btn {
   margin-top: 0
 }
-main:not(.site2) {
+body.s-main {
   background: #e9fbfc;
   background: -webkit-gradient(linear, left top, right top, from(#e9fbfc), color-stop(50%, #f4f8fe), to(#e9fbfc));
   background: linear-gradient(90deg, #e9fbfc 0%, #f4f8fe 50%, #e9fbfc 100%)
