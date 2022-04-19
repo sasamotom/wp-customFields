@@ -1575,20 +1575,25 @@ body.s-main {
 .sec-courseDetail .courseInfo p {
   margin-top: 1em
 }
-.sec-courseDetail .courseInfo_table {
+.sec-courseDetail .courseInfo_table,
+.sec-courseDetail .courseInfo table {
   margin-top: 1rem;
   border-spacing: 0 1rem;
   border-collapse: separate
 }
-.sec-courseDetail .courseInfo_table tr {
+.sec-courseDetail .courseInfo_table tr,
+.sec-courseDetail .courseInfo table tr {
   margin-top: 1em;
   border-bottom: 1px solid #aaa
 }
 .sec-courseDetail .courseInfo_table th,
-.sec-courseDetail .courseInfo_table td {
+.sec-courseDetail .courseInfo_table td,
+.sec-courseDetail .courseInfo table th,
+.sec-courseDetail .courseInfo table td {
   padding: 0 1em
 }
-.sec-courseDetail .courseInfo_table th {
+.sec-courseDetail .courseInfo_table th,
+.sec-courseDetail .courseInfo table th {
   width: 6em;
   padding: 0;
   text-align: center;

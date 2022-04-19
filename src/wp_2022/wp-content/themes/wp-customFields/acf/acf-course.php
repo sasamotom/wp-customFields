@@ -101,6 +101,34 @@ add_action( 'pre_get_posts', 'add_post_category_archive_course');
 // add_action( 'restrict_manage_posts', 'add_custom_taxonomies_term_filter_course' );
 
 //----------------------------------------------
+// Wysiwygエディタで不要なボタンを削除する（Wysiwygエディタのツールバー種類にSimpleを足す）
+//----------------------------------------------
+function my_mce_plugins($plugins) {
+  // テーブルの構造を挿入することができるJavaScriptをプラグインとして追加
+  $plugins['table'] = 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.4/plugins/table/plugin.min.js';
+  return $plugins;
+}
+add_filter( 'mce_external_plugins', 'my_mce_plugins' ); // ビジュアルエディタに、ボタン処理行うスクリプトの場所を設定する
+function my_mce_buttons_3( $buttons ) {
+  $buttons = array();
+  global $typenow;
+  if ( $typenow === 'course' ) {
+    // ツールバー3段目の先頭にテーブルのボタンを追加
+    array_unshift( $buttons,'table' );
+  }
+  return $buttons;
+}
+add_filter( 'mce_buttons_3', 'my_mce_buttons_3' );  // ビジュアルエディタに、ボタン名を設定する
+function my_acf_toolbars($toolbars) {
+  // ツールバーの種類に「Simple」を追加
+  $toolbars['Simple'] = array();
+  // Simpleツールバーに表示するボタンを指定
+  $toolbars['Simple'][1] = array('table'); // 「Simple」ツールバーの1段目に表示したいボタンを選択
+  return $toolbars;
+}
+add_filter('acf/fields/wysiwyg/toolbars' , 'my_acf_toolbars');  // ACFのWysiwygエディタでツールバーの種類にSimpleを足す
+
+//----------------------------------------------
 // ショートコード
 //----------------------------------------------
 // コースリストの取得
