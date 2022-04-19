@@ -175,7 +175,7 @@ function getPopularItemList($atts) {
   ), $atts));
   global $post;
   $oldpost = $post;
-  $myposts = get_posts('numberposts='.$num.'&meta_key=good&order=desc&orderby=meta_value_num&post_type='.$cat.'&tag='.$tag);
+  $myposts = get_posts('numberposts='.$num.'&meta_key=good&order=desc&orderby=meta_value_num date&post_type='.$cat.'&tag='.$tag);
   if (!$myposts) {
     return false;
   }
