@@ -125,21 +125,26 @@ body {
     }
     &_date {
       flex-shrink: 0;
+      + .newsList_tag {
+        margin-left: 1em;
+      }
     }
     &_tag {
       display: inline-block;
-      margin-left: 1em;
       padding: 0 0.5em;
       font-size: 70%;
       letter-spacing: -.1em;
       flex-shrink: 0;
-      &.cate01 {
+      + .newsList_tag {
+        margin-left: 1em;
+      }
+      &.release {
         background: $color03;
       }
-      &.cate02 {
+      &.campaign {
         background: $color02;
       }
-      &.cate03 {
+      &.notice {
         border: 1px solid #f3f3f3;
       }
     }
@@ -334,6 +339,7 @@ body {
       padding: .5em 2em .2em 1em;
       font-family: $fontMincho;
       font-size: 14px;
+      transition: .3s;
       color: #555;
       border: none;
       border: 2px solid $color02;
@@ -354,6 +360,10 @@ body {
         transform: translate(-50%, -50%);
         opacity: .7;
         background: url(/wp_2022/wp-content/uploads/2_icon_heart.svg) right center / contain no-repeat;
+      }
+      &:disabled {
+        pointer-events: none;
+        opacity: .5;
       }
       &:hover {
         &::before {
