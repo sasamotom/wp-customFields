@@ -1195,13 +1195,17 @@ body.s-main {
   margin-top: 3rem
 }
 .blogContainer img.aligncenter,
-.editContainer img.aligncenter {
+.blogContainer figure.aligncenter,
+.editContainer img.aligncenter,
+.editContainer figure.aligncenter {
   display: block;
   margin-right: auto;
   margin-left: auto
 }
 .blogContainer img.alignright,
-.editContainer img.alignright {
+.blogContainer figure.alignright,
+.editContainer img.alignright,
+.editContainer figure.alignright {
   display: block;
   margin-right: 0;
   margin-left: auto
@@ -1226,6 +1230,10 @@ body.s-main {
   font-size: 170%;
   border-bottom: 2px solid #c1dbea;
   border-bottom: 0.2rem solid #c1dbea
+}
+.blogContainer h2 + *,
+.editContainer h2 + * {
+  margin-top: 1em
 }
 .blogContainer h3,
 .editContainer h3 {

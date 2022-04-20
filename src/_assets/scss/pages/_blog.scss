@@ -73,12 +73,14 @@
 .blogContainer,
 .editContainer {
   margin-top: 3rem;
-  img.aligncenter {
+  img.aligncenter,
+  figure.aligncenter {
     display: block;
     margin-right: auto;
     margin-left: auto;
   }
-  img.alignright {
+  img.alignright,
+  figure.alignright {
     display: block;
     margin-right: 0;
     margin-left: auto;
@@ -90,6 +92,9 @@
     width: fit-content;
     font-size: 170%;
     border-bottom: 2px solid $color01;
+    + * {
+      margin-top: 1em;
+    }
   }
   h3 {
     font-size: 150%;
