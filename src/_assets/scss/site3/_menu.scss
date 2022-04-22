@@ -1,0 +1,60 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.site3 {
+  .cateTxt {
+    text-align: center;
+  }
+  .donutsCategory {
+    counter-reset: number;
+    > li {
+      position: relative;
+      padding: 10rem  0 5rem;
+      &::before {
+        content: counter(number);
+        position: absolute;
+        z-index: -1;
+        top: -7rem;
+        left: 50%;
+        font-size: 20rem;
+        counter-increment: number;
+        transform: translateX(-50%);
+        color: $color31;
+      }
+      &:nth-child(2n) {
+        &::before {
+          color: $color30;
+        }
+      }
+    }
+  }
+  .donutsList {
+    display: flex;
+    margin-top: 5rem;
+    gap: 3rem 2.6%;
+    flex-wrap: wrap;
+    > li{
+      width: 23%;
+    }
+    &.-detail {
+      flex-direction: row;
+      > li {
+        width: 100%;
+        margin-top: -5rem;
+        padding-top: 10rem;
+      }
+      .donutsInfo {
+        align-items: center;
+        display: flex;
+        gap: 3%;
+        &_pic {
+          width: 35%;
+          height: 22rem;
+        }
+        .txts {
+          width: 62%;
+        }
+      }
+    }
+  }
+}

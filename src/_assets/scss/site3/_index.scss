@@ -1,0 +1,122 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+
+.site3 {
+  .site3Mv {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 90vh;
+    background: url(/wp_2022/wp-content/uploads/3_mv.jpg) center center / cover;
+    justify-content: center;
+    align-items: center;
+    &_ttl {
+      width: fit-content;
+      margin: 0 auto;
+      padding: 0.2em 1em;
+      font-size: 2.4rem;
+      font-weight: bold;
+      background: #fff;
+    }
+  }
+
+  .topSite3 {
+    padding: 7rem 0 12rem;
+    text-align: center;
+    .txt {
+      margin-top: 4em;
+      font-weight: bold;
+    }
+    .pic {
+      width: 90%;
+      margin: 2em auto 0;
+    }
+  }
+  .topNew {
+    padding: 10rem 0 12rem;
+    background: rgb(34,193,195);
+    background: linear-gradient(90deg, $color30 0%, $color30 50%, $color31 50%);
+  }
+  .twoCols {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .secTtl {
+      margin-top: 0;
+    }
+    .col{
+      width: 45%;
+      .pic {
+        width: 85%;
+        margin: 2em auto 0;
+      }
+      .txt {
+        text-align: center;
+      }
+    }
+  }
+  .topMenu {
+    transition: .4s;
+    background: url(/wp_2022/wp-content/uploads/3_img03.jpg) center center / cover;
+    &:hover {
+      background:  url(/wp_2022/wp-content/uploads/3_img03.jpg) center bottom 30% / cover;
+    }
+    a {
+      display: block;
+      width: 100%;
+      padding: 1.2em 0;
+      font-size: 8rem;
+      text-align: center;
+      color: #fff;
+      text-shadow: 7px 5px 0 $color30, -7px -5px 0 $color31;
+      &::after {
+        content: " >>>>>>>>>";
+      }
+      &:hover {
+        text-shadow: 1px 1px 0 $color30, -1px -1px 0 $color31;
+      }
+    }
+  }
+  .topShop {
+    padding: 11rem 0 13rem;
+    .secTtl {
+      margin-top: 0;
+    }
+    .twoCols {
+      margin-top: 8rem;
+    }
+    .txt {
+      margin-top: 0;
+    }
+  }
+  .topRecruit {
+    position: relative;
+    padding: 9rem 0 10rem;
+    background: $color31;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 50%;
+      height: 100%;
+      background: url(/wp_2022/wp-content/uploads/3_img05.jpg) center center / cover no-repeat;
+    }
+    .twoCols {
+      &::before {
+        content: "";
+        display: block;
+      }
+    }
+  }
+  .topSite3,
+  .topNew,
+  .topMenu,
+  .topShop,
+  .topRecruit {
+    .secTtl {
+      font-size: 6rem;
+    }
+  }
+}
