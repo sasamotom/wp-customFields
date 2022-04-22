@@ -1070,6 +1070,9 @@ body.s-main {
 .footer .linkList > li a[href="/site2/"] {
   border-color: #fff3d7
 }
+.footer .linkList > li a[href="/site3/"] {
+  border-color: #f4c4f0
+}
 .sec-aboutTools {
   position: relative;
   z-index: 1

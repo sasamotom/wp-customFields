@@ -263,14 +263,28 @@ var _default = function _default() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _class_swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./class/swiper */ "./src/_assets/js/class/swiper.js");
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _class_swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./class/swiper */ "./src/_assets/js/class/swiper.js");
 /* harmony import */ var _class_micromodal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./class/micromodal */ "./src/_assets/js/class/micromodal.js");
 
 
 window.addEventListener('DOMContentLoaded', function () {
   new _class_swiper__WEBPACK_IMPORTED_MODULE_0__["default"]();
   new _class_micromodal__WEBPACK_IMPORTED_MODULE_1__["default"]();
+}); // スムーススクロール
+
+$('a[href^="#"]:not([href="#"])').on('click', function () {
+  var target = 0;
+
+  if ($(this).attr('href') !== "##") {
+    target = $($(this).attr('href')).offset().top;
+  }
+
+  $('html, body').animate({
+    scrollTop: target
+  }, 500);
+  return false;
 });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ })
 
