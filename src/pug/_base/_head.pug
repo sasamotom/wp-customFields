@@ -45,11 +45,14 @@ script(type="application/ld+json").
   }
 link(rel="preconnect", href="https://fonts.googleapis.com")
 link(rel="preconnect", href="https://fonts.gstatic.com" crossorigin)
-link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Cardo:ital@1&text=0123456789AQSupport&display=swap")
+link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap")
 link(rel="icon", href="/favicon.ico")
 link(rel="canonical", href=page.url)
 link(rel="stylesheet", href="/_assets/css/style.css")
 if parent == "site2"
   link(rel="stylesheet", href="/_assets/css/site2.css")
+else if parent == "site3"
+  link(rel="stylesheet", href="/_assets/css/site3.css")
+
 //- if key !== "top"
   link(rel="stylesheet", href="/_assets/css/" + key + ".css")
