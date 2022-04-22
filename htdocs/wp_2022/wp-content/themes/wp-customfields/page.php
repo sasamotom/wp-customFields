@@ -8,12 +8,18 @@
 ?>
 
 <main id="main" class="<?php echo $parent_slug ?>">
-<?php if ($slug === 'site2') : ?>
+<?php if ($slug === 'site2' || $slug === 'site3') : ?>
   <!-- ページタイトルなし -->
 <?php elseif ($parent_slug === 'site2') : ?>
   <div class="pageTtlContainer <?php echo $slug ?>">
     <div class="container">
       <h1 class="site2PageTtl"><?php the_title(); ?></h1>
+    </div>
+  </div>
+<?php elseif ($parent_slug === 'site3') : ?>
+  <div class="pageTtlContainer">
+    <div class="container">
+      <h1 class="site3PageTtl"><?php the_title(); ?></h1>
     </div>
   </div>
 <?php else : ?>

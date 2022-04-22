@@ -75,9 +75,13 @@ function shapeSpace_check_enum($redirect, $request) {
 // --------------------------------------------------------------
 function my_script_init() {
   wp_enqueue_style( 'style-name', get_theme_file_uri() . '/_assets/css/style.css', array(), '1.0.0', 'all' );
-  // site2の場合は、site2のCSSを読み込む
   if (check_sub_site('site2')) {
+    // site2の場合は、site2のCSSを読み込む
     wp_enqueue_style( 'site2', get_theme_file_uri() . '/_assets/css/site2.css', array('style-name'), '1.0.0', 'all' );
+  }
+  elseif (check_sub_site('site3')) {
+    // site3の場合は、site3のCSSを読み込む
+    wp_enqueue_style( 'site3', get_theme_file_uri() . '/_assets/css/site3.css', array('style-name'), '1.0.0', 'all' );
   }
   // wp_enqueue_script( 'script-name', get_theme_file_uri() . '/_assets/js/script.js', array( 'jquery' ), '1.0.0', true );
 }
@@ -284,6 +288,9 @@ function pagename_class($classes) {
   // どのサイトであるかの判断用
   if (check_sub_site('site2')) {
     $classes[] = 's-site2';
+  }
+  elseif (check_sub_site('site3')) {
+    $classes[] = 's-site3';
   }
   else {
     $classes[] = 's-main';
