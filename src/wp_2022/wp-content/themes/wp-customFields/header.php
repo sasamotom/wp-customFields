@@ -42,6 +42,18 @@
     </ul>
   </nav>
 </header>
+<?php elseif (check_sub_site('site3')): ?>
+<!-- /site3/配下のサイト -->
+<header class="header">
+  <nav class="gnav" id="gnav">
+    <?php wp_nav_menu( array (
+      'theme_location' => 'site3nav',                   // 登録したメニューのキーを入れる
+      'items_wrap' => '<ul class="gnavList">%3$s</ul>', // ulを指定
+      'container' => false,                             // "div"や"nav"を指定するとラッパー生成できるけどclassをつけたい場合はこのPHP自体をnavで括る方が早い
+      'echo' => true,                                   // falseで変数として出力（加工ができる）
+    )); ?>
+  </nav>
+</header>
 <?php else: ?>
 <!-- /配下のサイト -->
 <header class="header">

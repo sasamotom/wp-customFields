@@ -96,6 +96,7 @@ function my_menu_init() {
     'global'  => 'グローバルメニュー',
     // 'utility' => 'ユーティリティメニュー',
     // 'drawer'  => 'ドロワーメニュー',
+    'site3nav' => 'サイト３メニュー',
     'footNavi'  => 'フッターメニュー',
   ) );
 }
@@ -515,7 +516,7 @@ add_filter( 'nav_menu_item_id', 'my_nav_menu_id' );
 
 function my_nav_menu_class( $classes, $item ) {
   // 管理画面からメニューにclassを設定した場合
-  if( $classes[0] ) {
+  if( isset($classes[0]) ) {
     // 管理画面から設定したclass以外を削除
     array_splice( $classes, 1 );
   }
@@ -525,8 +526,8 @@ function my_nav_menu_class( $classes, $item ) {
   }
   // 現在のページのliタグの場合
   if( $item -> current == true ) {
-    // classの値にcurrentを付与
-    $classes[] = 'current';
+    // classの値に-currentを付与
+    $classes[] = '-current';
   }
   return $classes;
 }
