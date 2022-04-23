@@ -720,5 +720,6 @@ require_once ( 'acf/acf-course.php' );
 require_once ( 'acf/acf-item.php' );
 require_once ( 'acf/acf-news.php' );
 require_once ( 'acf/acf-feature_story.php' );
+require_once ( 'acf/acf-menu.php' );
 
 ?>
