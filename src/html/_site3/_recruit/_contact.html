@@ -1,0 +1,73 @@
+<div class="pageTtlContainer">
+  <div class="container">
+    <h1 class="site3PageTtl">RECRUIT</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="layout_2cols">
+    <nav class="col1 recruitNav">
+      <ul class="recruitNavList">
+        <li><a href="/site3/recruit/"><span class="-large">RECRUIT TOP</span></a></li>
+        <li><a href="/site3/recruit/regularemployee/"><span class="-large">REGULAR EMPLOYEE</span><br>正社員</a></li>
+        <li><a href="/site3/recruit/parttimer/"><span class="-large">PART TIMER</span><br>アルバイト</a></li>
+        <li><a href="/site3/recruit/contact/"><span class="-large">CONTACT</span><br>お問合せ・応募</a></li>
+      </ul>
+    </nav>
+    <div class="col2">
+      <div class="sec-apply">
+        <div class="container">
+          <p class="contactTxt">お問合せ・応募をご希望される方は、以下を入力して送信してください。</p>
+          <form action="">
+            <table class="contactTable">
+              <tbody>
+                <tr class="contactTable_required">
+                  <th><label for="name">お名前</label></th>
+                  <td><input type="text" name="お名前" placeholder="" id="name" required></td>
+                </tr>
+                <tr class="contactTable_required">
+                  <th><label for="ruby">ふりがな</label></th>
+                  <td><input type="text" name="ふりがな" placeholder="" id="ruby" required></td>
+                </tr>
+                <tr class="contactTable_required">
+                  <th><label for="tel">電話番号</label></th>
+                  <td><input type="tel" name="電話番号" placeholder="" id="tel" required></td>
+                </tr>
+                <tr class="contactTable_required">
+                  <th><label for="mail">メールアドレス</label></th>
+                  <td><input type="email" name="メールアドレス" placeholder="" id="mail" required></td>
+                </tr>
+                <tr>
+                  <th><label for="address">住所</label></th>
+                  <td><input type="text" name="住所" placeholder="" id="address" required></td>
+                </tr>
+                <tr class="contactTable_required">
+                  <th><label for="kind">種別</label></th>
+                  <td>
+                    <div class="contactTable_radioRow">
+                      <input type="radio" name="種別" value="お問合せ" id="kind1"><label for="kind1">お問合せ</label>
+                    </div>
+                    <div class="contactTable_radioRow">
+                      <input type="radio" name="種別" value="応募" id="kind2"><label for="kind2">応募</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th><label for="message">連絡事項や<br>お問い合わせ内容</label></th>
+                  <td>
+                    <textarea name="連絡事項やお問い合わせ内容" rows="5" placeholder="何かございましたら、こちらにご入力ください。" id="message" ></textarea>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="btnContainer">
+              <div class="btn -input">
+                <input type="submit" name="submitConfirm" value="確認画面へ" class="send">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
