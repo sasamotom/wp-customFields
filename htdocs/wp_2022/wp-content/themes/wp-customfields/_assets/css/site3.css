@@ -1275,6 +1275,12 @@ body * {
   margin-top: 1em;
   line-height: 1.7
 }
+.site3 .sec-apply.-confirm .contactTable td {
+  padding: 0.5em 0
+}
+.site3 .sec-apply .contactTxt {
+  text-align: left
+}
 .site3 .sec-apply .contactTable {
   font-size: 80%
 }
@@ -1285,16 +1291,6 @@ body * {
   width: 100%;
   padding: 0.5em;
   background: #f5f5f5
-}
-@supports (-webkit-appearance: none) or (-moz-appearance: none) {
-  .site3 .sec-apply .contactTable input[type=checkbox],
-  .site3 .sec-apply .contactTable input[type=radio] {
-    --active: #f4c4f0;
-    --focus: 2px #f4c4f0aa;
-    --focus: 0.2rem #f4c4f0aa;
-    --border-hover: #f4c4f0;
-    --disabled-inner: #f4c4f0
-  }
 }
 .site3 .sec-apply .contactTable_required th {
   display: -webkit-box;
@@ -1313,18 +1309,67 @@ body * {
   border: 1px solid #f4c4f0;
   background: none
 }
+.site3 .sec-apply .contactTable .rowRadio {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center
+}
+.site3 .sec-apply .contactTable .rowRadio label {
+  vertical-align: middle
+}
+.site3 .sec-apply .contactTable .rowRadio input {
+  margin-right: 0.2em;
+  vertical-align: middle
+}
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+  .site3 .sec-apply .contactTable input[type=checkbox],
+  .site3 .sec-apply .contactTable input[type=radio] {
+    --active: #f4c4f0;
+    --focus: 2px #f4c4f0aa;
+    --focus: 0.2rem #f4c4f0aa;
+    --border-hover: #f4c4f0;
+    --disabled-inner: #f4c4f0
+  }
+}
+.site3 .sec-apply .btn .wpcf7-spinner {
+  position: relative;
+  display: inline-block;
+  visibility: hidden;
+  width: 24px;
+  width: 2.4rem;
+  height: 24px;
+  height: 2.4rem;
+  margin: 0 24px;
+  margin: 0 2.4rem;
+  padding: 0;
+  opacity: 0.75;
+  border: none;
+  border-radius: 100%;
+  background-color: #23282d
+}
+.site3 .sec-apply .btn .wpcf7-spinner::before,
+.site3 .sec-apply .btn .wpcf7-spinner::after {
+  display: none
+}
+.site3 .sec-apply .btn input {
+  display: inline-block
+}
 .site3 .sec-apply .btn input,
-.site3 .sec-apply .backBtn button {
+.site3 .sec-apply .backBtn input {
+  padding: 0.4em 1em;
   color: #79dff1;
   border-color: #79dff1
 }
 .site3 .sec-apply .btn input:hover,
-.site3 .sec-apply .backBtn button:hover {
+.site3 .sec-apply .backBtn input:hover {
   background: rgba(121, 223, 241, 0.15)
 }
 .site3 .sec-apply .btn.-input::after,
 .site3 .sec-apply .backBtn button::before {
-  border-color: #79dff1
+  display: none
 }
 .site3 .sec-shop {
   text-align: center

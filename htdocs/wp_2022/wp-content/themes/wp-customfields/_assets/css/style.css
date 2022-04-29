@@ -539,7 +539,8 @@ img {
   margin-top: 3rem
 }
 .backBtn a,
-.backBtn button {
+.backBtn button,
+.backBtn input {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -564,7 +565,8 @@ img {
   align-items: center
 }
 .backBtn a::before,
-.backBtn button::before {
+.backBtn button::before,
+.backBtn input::before {
   content: "";
   position: relative;
   display: block;
@@ -579,12 +581,14 @@ img {
   border-left: 1px solid #c1dbea
 }
 .backBtn a:hover,
-.backBtn button:hover {
+.backBtn button:hover,
+.backBtn input:hover {
   color: #fff;
   background: #c1dbea
 }
 .backBtn a:hover::before,
-.backBtn button:hover::before {
+.backBtn button:hover::before,
+.backBtn input:hover::before {
   -webkit-transform: translateX(-0.2em) rotate(45deg);
   transform: translateX(-0.2em) rotate(45deg);
   border-color: #fff

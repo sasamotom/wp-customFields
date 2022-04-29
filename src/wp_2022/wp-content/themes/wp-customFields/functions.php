@@ -97,6 +97,7 @@ function my_menu_init() {
     // 'utility' => 'ユーティリティメニュー',
     // 'drawer'  => 'ドロワーメニュー',
     'site3nav' => 'サイト３メニュー',
+    'site3recruit' => 'サイト３採用メニュー',
     'footNavi'  => 'フッターメニュー',
   ) );
 }

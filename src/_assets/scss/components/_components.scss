@@ -97,7 +97,8 @@
 .backBtn {
   margin-top: 3rem;
   a,
-  button {
+  button,
+  input {
     display: flex;
     width: fit-content;
     max-width: 300px;
