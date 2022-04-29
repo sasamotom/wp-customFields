@@ -39,6 +39,11 @@ body {
           text-shadow: 3px 2px 0 $color30;
         }
       }
+      .-current {
+        a {
+          text-shadow: 3px 2px 0 $color30;
+        }
+      }
     }
   }
 }
