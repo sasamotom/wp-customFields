@@ -722,5 +722,6 @@ require_once ( 'acf/acf-item.php' );
 require_once ( 'acf/acf-news.php' );
 require_once ( 'acf/acf-feature_story.php' );
 require_once ( 'acf/acf-menu.php' );
+require_once ( 'customfield/cf-coupon.php' );
 
 ?>

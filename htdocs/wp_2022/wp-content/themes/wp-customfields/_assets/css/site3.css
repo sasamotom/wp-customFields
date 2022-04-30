@@ -983,6 +983,32 @@ body * {
 .site3 .sec-coupon .couponList > li {
   width: calc((100% - 2rem) / 2)
 }
+.site3 .sec-coupon .couponList > li.notStart {
+  position: relative
+}
+.site3 .sec-coupon .couponList > li.notStart::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5)
+}
+.site3 .sec-coupon .couponList > li.notStart::after {
+  content: "COMING SOON!!!!";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-block;
+  padding: 0.2em 0.8em;
+  font-size: 7rem;
+  line-height: 1.2;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.7)
+}
 .site3 .site3Mv {
   position: relative;
   display: -webkit-box;
