@@ -1,5 +1,33 @@
 <?php get_header(); ?>
 
+<?php
+// // SQLを自分で発行して、理想の並び順で一括でデータを取得するやり方-----ここから↓
+// global $wpdb;
+// $sql = "
+//   SELECT
+//     wp_posts.*, wp_term_relationships.term_taxonomy_id, wp_terms.term_order, wp_terms.name as termname
+//   FROM wp_posts
+//     LEFT JOIN wp_term_relationships ON (wp_posts.ID = wp_term_relationships.object_id)
+//     LEFT JOIN wp_terms ON (wp_term_relationships.term_taxonomy_id = wp_terms.term_id)
+//   WHERE
+//     wp_posts.post_type = 'menu'
+//     AND
+//     ((wp_posts.post_status = 'publish'))
+//   ORDER BY
+//     wp_terms.term_order ASC,
+//     wp_posts.menu_order ASC
+// ";
+// $results = $wpdb->get_results($sql);
+// foreach ($results as $post):
+//   setup_postdata($post);
+//   // ここでデータを表示する（とりあえず、タイトルと詳細テキスト）
+//   echo '<p>'.$post->termname.'</p>';    // タクソノミー名（LIMITED DONUTS, FUWAFUWA DONUTS, MOIST DONUTSのどれか）
+//   echo '<p>'.esc_html(the_title()).'</p>';
+//   echo '<p>'.get_field('text').'</p>';
+// endforeach;
+// // SQLを自分で発行して、理想の並び順で一括でデータを取得するやり方-----ここまで↑
+?>
+
 <main id="main" class="site3">
   <div class="pageTtlContainer">
     <div class="container">
