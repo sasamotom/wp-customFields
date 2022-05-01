@@ -1,0 +1,91 @@
+<header class="searchHeader">
+  <h1 class="searchHeader_ttl">検索ページ</h1>
+</header>
+
+<form class="searchForm" action="" id="searchForm">
+  <section class="sec-searchItem">
+    <div class="container">
+      <h2 class="searchSecTtl">キーワード指定</h2>
+      <input class="searchTextBox" type="search" name="s" placeholder="検索したい言葉を入力してください"><br>
+    </div>
+  </section>
+  <section class="sec-searchItem">
+    <div class="container">
+      <h2 class="searchSecTtl">詳細条件指定</h2>
+      <ul class="searchKindList">
+        <li>
+          <h3 class="searchKindList_ttl">サイト / ページ種別 / カテゴリ・タグ</h3>
+          <ul class="searchCheckList -site">
+            <li>
+              <input type="checkbox" checked name="site" value="site1" id="site1"><label for="site1">パステルアート教室（main site）</label>
+              <ul class="searchCheckList">
+                <li><input type="checkbox" checked name="site" value="cate1_1" id="cate1_1"><label for="cate1_1">講座</label></li>
+                <li><input type="checkbox" checked name="site" value="cate1_2" id="cate1_2"><label for="cate1_2">よくある質問</label></li>
+                <li><input type="checkbox" checked name="site" value="cate1_3" id="cate1_3"><label for="cate1_3">BLOG</label></li>
+                <li><input type="checkbox" checked name="site" value="cate1_4" id="cate1_4"><label for="cate1_4">上記以外</label></li>
+              </ul>
+            </li>
+            <li>
+              <input type="checkbox" checked name="site" value="site2" id="site2"><label for="site2">アクセサリーブランド（site2）</label>
+              <ul class="searchCheckList">
+                <li>
+                  <input type="checkbox" checked name="site" value="cate2_1" id="cate2_1"><label for="cate2_1">News</label>
+                  <ul class="searchCheckList -child">
+                    <li><span class="childKindName">カテゴリ：</span></li>
+                    <li><input type="checkbox" checked name="site" value="cate2_1_1" id="cate2_1_1"><label for="cate2_1_1">新商品</label></li>
+                    <li><input type="checkbox" checked name="site" value="cate2_1_2" id="cate2_1_2"><label for="cate2_1_2">キャンペーン</label></li>
+                    <li><input type="checkbox" checked name="site" value="cate2_1_3" id="cate2_1_3"><label for="cate2_1_3">お知らせ</label></li>
+                  </ul>
+                </li>
+                <li>
+                  <input type="checkbox" checked name="site" value="cate2_2" id="cate2_2"><label for="cate2_2">Item</label>
+                  <ul class="searchCheckList -child">
+                    <li><span class="childKindName">カテゴリ：</span></li>
+                    <li><input type="checkbox" checked name="site" value="cate2_2_1" id="cate2_2_1"><label for="cate2_2_1">イヤリング</label></li>
+                    <li><input type="checkbox" checked name="site" value="cate2_2_2" id="cate2_2_2"><label for="cate2_2_2">ピアス</label></li>
+                    <li><input type="checkbox" checked name="site" value="cate2_2_3" id="cate2_2_3"><label for="cate2_2_3">リング</label></li>
+                    <li><input type="checkbox" checked name="site" value="cate2_2_4" id="cate2_2_4"><label for="cate2_2_2">バングル</label></li>
+                    <li><input type="checkbox" checked name="site" value="cate2_2_5" id="cate2_2_5"><label for="cate2_2_5">ネックレス</label></li>
+                  </ul>
+                  <ul class="searchCheckList -child">
+                    <li><span class="childKindName">タグ：</span></li>
+                    <li><input type="checkbox" checked name="site" value="cate2_2_6" id="cate2_2_6"><label for="cate2_2_6">プレゼント</label></li>
+                    <li><input type="checkbox" checked name="site" value="cate2_2_7" id="cate2_2_7"><label for="cate2_2_7">春</label></li>
+                    <li><input type="checkbox" checked name="site" value="cate2_2_8" id="cate2_2_8"><label for="cate2_2_8">夏</label></li>
+                  </ul>
+                </li>
+                <li><input type="checkbox" checked name="site" value="cate2_3" id="cate2_3"><label for="cate2_3">Feature story</label></li>
+                <li><input type="checkbox" checked name="site" value="cate2_4" id="cate2_4"><label for="cate2_4">上記以外</label></li>
+              </ul>
+            </li>
+            <li>
+              <input type="checkbox" checked name="site" value="site3" id="site3"><label for="site3">DONUTS SHOP（site3）</label>
+              <ul class="searchCheckList">
+                <li>
+                  <input type="checkbox" checked name="site" value="cate3_1" id="cate3_1"><label for="cate3_1">MENU</label>
+                  <ul class="searchCheckList -child">
+                    <li><span class="childKindName">カテゴリ：</span></li>
+                    <li><input type="checkbox" checked name="site" value="cate3_1_1" id="cate3_1_1"><label for="cate3_1_1">LIMITED DONUTS</label></li>
+                    <li><input type="checkbox" checked name="site" value="cate3_1_2" id="cate3_1_2"><label for="cate3_1_2">FUWAFUWA DONUTS</label></li>
+                    <li><input type="checkbox" checked name="site" value="cate3_1_3" id="cate3_1_3"><label for="cate3_1_3">MOIST DONUTS</label></li>
+                  </ul>
+                </li>
+                <li><input type="checkbox" checked name="site" value="cate3_4" id="cate3_4"><label for="cate3_4">上記以外</label></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h3 class="searchKindList_ttl">投稿期間</h3>
+          <input type="date" name="startdate">　〜　<input type="date" name="enddate">
+        </li>
+      </ul>
+    </div>
+  </section>
+  <div class="sec-searchItem">
+    <div class="container">
+      <button class="searchBtn" type="submit">検索する</button>
+    </div>
+  </div>
+</form>
+
