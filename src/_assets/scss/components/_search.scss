@@ -1,0 +1,254 @@
+@use "../settings/mixins" as *;
+@use "../settings/variables" as *;
+@use "sass:math";
+
+$colorSearch: #d3f597;
+
+// 検索
+.searchForm {
+  &.-footer {
+    position: absolute;
+    right: 2rem;
+    bottom: 0;
+    padding-bottom: 2rem;
+    @include mq() {
+      position: static;
+      margin: 0 1em;
+      padding-top: 0.5em;
+      text-align: right;
+    }
+    .searchTextBox {
+      width: 10em;
+    }
+    .searchBtn {
+      width: 30px;
+      margin-top: 0;
+      padding: 0.2em;
+      border: 1px solid #ddd;
+      background: #eee;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  input[type=text],
+  input[type=date],
+  .searchTextBox {
+    font-family: inherit;
+    vertical-align: middle;
+    color: inherit;
+    border: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  .searchTextBox {
+    width: 30em;
+    padding: 0.2em;
+    border: 1px solid #eee;
+  }
+  input[type=date] {
+    width: 10em;
+    padding: 0.2em;
+    border: 1px solid #eee;
+  }
+  .searchBtn {
+    margin-top: .8em;
+    padding: 0.2em 1em;
+    padding: 0.7em 1.5em;
+    font-size: 110%;
+    transition: .3s;
+    vertical-align: middle;
+    border: none;
+    background: $colorSearch;
+    &:hover {
+      opacity: .7;
+    }
+  }
+  .searchSecTtl {
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+    margin-bottom: .8em;
+    padding: 0 0.2em;
+    font-size: 130%;
+    font-weight: bold;
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      bottom: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 40%;
+      background: $colorSearch;
+    }
+  }
+  .searchKindList {
+    >li {
+      + li {
+        margin-top: 2em;
+      }
+    }
+    &_ttl {
+      display: flex;
+      margin-bottom: 0.7em;
+      font-size: 115%;
+      font-weight: bold;
+      align-items: center;
+      &::before {
+        content: "";
+        display: block;
+        width: .8em;
+        height: 1em;
+        margin-right: .5em;
+        background: $colorSearch;
+        clip-path: polygon(0 0, 0% 100%, 100% 50%);
+      }
+    }
+  }
+  .searchCheckList {
+    > li {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      +li {
+        margin-top: 0.3em;
+      }
+    }
+    > li > .searchCheckList {
+      width: 100%;
+      padding-left: 2em;
+    }
+    &.-site {
+      > li + li {
+        margin-top: 2em;
+      }
+    }
+    &.-child {
+      display: flex;
+      width: 100%;
+      padding-left: 2em;
+      > li + li {
+        margin-left: 1em;
+      }
+      .childKindName {
+        opacity: .7;
+      }
+    }
+  }
+  @supports(-webkit-appearance: none) or (-moz-appearance: none) {
+    input[type='checkbox'],
+    input[type='radio'] {
+      --active: #{$colorSearch};
+      --active-inner: #fff;
+      --focus: 2px #{$colorSearch}aa;
+      --border: #c5c5c5;
+      --border-hover: #{$colorSearch};
+      --background: #fff;
+      --disabled: #eee;
+      --disabled-inner: #{$colorSearch};
+      position: relative;
+      display: inline-block;
+      width: 18px;
+      min-width: 18px;
+      height: 18px;
+      margin: 0;
+      cursor: pointer;
+      transition: background .3s, border-color .3s, box-shadow .2s;
+      border: 1px solid var(--bc, var(--border));
+      outline: none;
+      background: var(--b, var(--background));
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        transition: transform var(--d-t, .3s) var(--d-t-e, ease), opacity var(--d-o, .2s);
+      }
+      &:checked {
+        --b: var(--active);
+        --bc: var(--active);
+        --d-o: .3s;
+        --d-t: .6s;
+        --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+      }
+      &:disabled {
+        --b: var(--disabled);
+        cursor: not-allowed;
+        opacity: .9;
+        &:checked {
+          --b: var(--disabled-inner);
+          --bc: var(--border);
+        }
+        & + label {
+          cursor: not-allowed;
+          opacity: .5;
+        }
+      }
+      &:hover {
+        &:not(:checked) {
+          &:not(:disabled) {
+            --bc: var(--border-hover);
+          }
+        }
+      }
+      &:focus {
+        box-shadow: 0 0 0 var(--focus);
+      }
+      &:not(.switch) {
+        &:after {
+          opacity: var(--o, 0);
+        }
+        &:checked {
+          --o: 1;
+          + label {
+            color: $colorText;
+          }
+        }
+      }
+      & + label {
+        margin-left: .5em;
+        cursor: pointer;
+      }
+    }
+    input[type='checkbox'] {
+      &:not(.switch) {
+        border-radius: 4px;
+        &:after {
+          top: 3px;
+          left: 5px;
+          width: 6px;
+          height: 9px;
+          transform: rotate(var(--r, 20deg));
+          border: 2px solid var(--active-inner);
+          border-top: 0;
+          border-left: 0;
+        }
+        &:checked {
+          --r: 43deg;
+        }
+      }
+    }
+  }
+}
+body.s-main.p-search {
+  background: #fff;
+}
+.searchHeader {
+  padding: 0.5rem 2em;
+  &_ttl {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}
+.sec-searchItem + .sec-searchItem {
+  padding-top: 0;
+}
+

@@ -1,0 +1,9 @@
+extends ../_base/_layout
+
+block vars
+  include ../_base/_settings
+  - let key = "search"
+  - let page = pages[key]
+
+block contents
+  include ../../html/_search/_index.html
