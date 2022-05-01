@@ -813,6 +813,281 @@ a .courseDtl:hover .courseDtl_name {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg)
 }
+.searchForm.-footer {
+  position: absolute;
+  right: 2rem;
+  bottom: 0;
+  padding-bottom: 2rem
+}
+@media (max-width: 48em) {
+  .searchForm.-footer {
+    position: static;
+    margin: 0 1em;
+    padding-top: 0.5em;
+    text-align: right
+  }
+}
+.searchForm.-footer .searchTextBox {
+  width: 10em
+}
+.searchForm.-footer .searchBtn {
+  width: 30px;
+  width: 3rem;
+  margin-top: 0;
+  padding: 0.2em;
+  border: 1px solid #ddd;
+  background: #eee
+}
+.searchForm.-footer .searchBtn img {
+  width: 100%;
+  height: auto
+}
+.searchForm input[type=text],
+.searchForm input[type=date],
+.searchForm .searchTextBox {
+  font-family: inherit;
+  vertical-align: middle;
+  color: inherit;
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none
+}
+.searchForm .searchTextBox {
+  width: 30em;
+  padding: 0.2em;
+  border: 1px solid #eee
+}
+.searchForm input[type=date] {
+  width: 10em;
+  padding: 0.2em;
+  border: 1px solid #eee
+}
+.searchForm .searchBtn {
+  margin-top: 0.8em;
+  padding: 0.2em 1em;
+  padding: 0.7em 1.5em;
+  font-size: 110%;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  vertical-align: middle;
+  border: none;
+  background: #d3f597
+}
+.searchForm .searchBtn:hover {
+  opacity: 0.7
+}
+.searchForm .searchSecTtl {
+  position: relative;
+  z-index: 1;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-bottom: 0.8em;
+  padding: 0 0.2em;
+  font-size: 130%;
+  font-weight: bold
+}
+.searchForm .searchSecTtl::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 40%;
+  background: #d3f597
+}
+.searchForm .searchKindList > li + li {
+  margin-top: 2em
+}
+.searchForm .searchKindList_ttl {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0.7em;
+  font-size: 115%;
+  font-weight: bold;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center
+}
+.searchForm .searchKindList_ttl::before {
+  content: "";
+  display: block;
+  width: 0.8em;
+  height: 1em;
+  margin-right: 0.5em;
+  background: #d3f597;
+  -webkit-clip-path: polygon(0 0, 0% 100%, 100% 50%);
+  clip-path: polygon(0 0, 0% 100%, 100% 50%)
+}
+.searchForm .searchCheckList > li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap
+}
+.searchForm .searchCheckList > li + li {
+  margin-top: 0.3em
+}
+.searchForm .searchCheckList > li > .searchCheckList {
+  width: 100%;
+  padding-left: 2em
+}
+.searchForm .searchCheckList.-site > li + li {
+  margin-top: 2em
+}
+.searchForm .searchCheckList.-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  padding-left: 2em
+}
+.searchForm .searchCheckList.-child > li + li {
+  margin-left: 1em
+}
+.searchForm .searchCheckList.-child .childKindName {
+  opacity: 0.7
+}
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+  .searchForm input[type=checkbox],
+  .searchForm input[type=radio] {
+    --active: #d3f597;
+    --active-inner: #fff;
+    --focus: 2px #d3f597aa;
+    --focus: 0.2rem #d3f597aa;
+    --border: #c5c5c5;
+    --border-hover: #d3f597;
+    --background: #fff;
+    --disabled: #eee;
+    --disabled-inner: #d3f597;
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    width: 1.8rem;
+    min-width: 18px;
+    min-width: 1.8rem;
+    height: 18px;
+    height: 1.8rem;
+    margin: 0;
+    cursor: pointer;
+    -webkit-transition: background 0.3s,border-color 0.3s,-webkit-box-shadow 0.2s;
+    transition: background 0.3s,border-color 0.3s,-webkit-box-shadow 0.2s;
+    transition: background 0.3s,border-color 0.3s,box-shadow 0.2s;
+    transition: background 0.3s,border-color 0.3s,box-shadow 0.2s,-webkit-box-shadow 0.2s;
+    border: 1px solid var(--bc, var(--border));
+    outline: none;
+    background: var(--b, var(--background));
+    -webkit-appearance: none;
+    -moz-appearance: none
+  }
+  .searchForm input[type=checkbox]:after,
+  .searchForm input[type=radio]:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    -webkit-transition: opacity var(--d-o, 0.2s),-webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
+    transition: opacity var(--d-o, 0.2s),-webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease);
+    transition: transform var(--d-t, 0.3s) var(--d-t-e, ease),opacity var(--d-o, 0.2s);
+    transition: transform var(--d-t, 0.3s) var(--d-t-e, ease),opacity var(--d-o, 0.2s),-webkit-transform var(--d-t, 0.3s) var(--d-t-e, ease)
+  }
+  .searchForm input[type=checkbox]:checked,
+  .searchForm input[type=radio]:checked {
+    --b: var(--active);
+    --bc: var(--active);
+    --d-o: .3s;
+    --d-t: .6s;
+    --d-t-e: cubic-bezier(.2, .85, .32, 1.2)
+  }
+  .searchForm input[type=checkbox]:disabled,
+  .searchForm input[type=radio]:disabled {
+    --b: var(--disabled);
+    cursor: not-allowed;
+    opacity: 0.9
+  }
+  .searchForm input[type=checkbox]:disabled:checked,
+  .searchForm input[type=radio]:disabled:checked {
+    --b: var(--disabled-inner);
+    --bc: var(--border)
+  }
+  .searchForm input[type=checkbox]:disabled + label,
+  .searchForm input[type=radio]:disabled + label {
+    cursor: not-allowed;
+    opacity: 0.5
+  }
+  .searchForm input[type=checkbox]:hover:not(:checked):not(:disabled),
+  .searchForm input[type=radio]:hover:not(:checked):not(:disabled) {
+    --bc: var(--border-hover)
+  }
+  .searchForm input[type=checkbox]:focus,
+  .searchForm input[type=radio]:focus {
+    -webkit-box-shadow: 0 0 0 var(--focus);
+    box-shadow: 0 0 0 var(--focus)
+  }
+  .searchForm input[type=checkbox]:not(.switch):after,
+  .searchForm input[type=radio]:not(.switch):after {
+    opacity: var(--o, 0)
+  }
+  .searchForm input[type=checkbox]:not(.switch):checked,
+  .searchForm input[type=radio]:not(.switch):checked {
+    --o: 1
+  }
+  .searchForm input[type=checkbox]:not(.switch):checked + label,
+  .searchForm input[type=radio]:not(.switch):checked + label {
+    color: #333
+  }
+  .searchForm input[type=checkbox] + label,
+  .searchForm input[type=radio] + label {
+    margin-left: 0.5em;
+    cursor: pointer
+  }
+  .searchForm input[type=checkbox]:not(.switch) {
+    border-radius: 4px;
+    border-radius: 0.4rem
+  }
+  .searchForm input[type=checkbox]:not(.switch):after {
+    top: 3px;
+    top: 0.3rem;
+    left: 5px;
+    left: 0.5rem;
+    width: 6px;
+    width: 0.6rem;
+    height: 9px;
+    height: 0.9rem;
+    -webkit-transform: rotate(var(--r, 20deg));
+    transform: rotate(var(--r, 20deg));
+    border: 2px solid var(--active-inner);
+    border: 0.2rem solid var(--active-inner);
+    border-top: 0;
+    border-left: 0
+  }
+  .searchForm input[type=checkbox]:not(.switch):checked {
+    --r: 43deg
+  }
+}
+body.s-main.p-search {
+  background: #fff
+}
+.searchHeader {
+  padding: 0.5rem 2em
+}
+.searchHeader_ttl {
+  font-size: 3rem;
+  font-weight: bold
+}
+.sec-searchItem + .sec-searchItem {
+  padding-top: 0
+}
 .header {
   position: fixed;
   z-index: 100;

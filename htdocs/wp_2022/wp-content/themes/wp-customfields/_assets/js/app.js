@@ -263,13 +263,16 @@ var _default = function _default() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _class_swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./class/swiper */ "./src/_assets/js/class/swiper.js");
-/* harmony import */ var _class_micromodal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./class/micromodal */ "./src/_assets/js/class/micromodal.js");
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom.iterable */ "./node_modules/core-js/modules/web.dom.iterable.js");
+/* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _class_swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./class/swiper */ "./src/_assets/js/class/swiper.js");
+/* harmony import */ var _class_micromodal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./class/micromodal */ "./src/_assets/js/class/micromodal.js");
+
 
 
 window.addEventListener('DOMContentLoaded', function () {
-  new _class_swiper__WEBPACK_IMPORTED_MODULE_0__["default"]();
-  new _class_micromodal__WEBPACK_IMPORTED_MODULE_1__["default"]();
+  new _class_swiper__WEBPACK_IMPORTED_MODULE_1__["default"]();
+  new _class_micromodal__WEBPACK_IMPORTED_MODULE_2__["default"]();
 }); // スムーススクロール
 
 $('a[href^="#"]:not([href="#"])').on('click', function () {
@@ -283,7 +286,34 @@ $('a[href^="#"]:not([href="#"])').on('click', function () {
     scrollTop: target
   }, 500);
   return false;
-});
+}); // 検索画面のJS処理
+
+if (document.getElementById('searchForm')) {
+  var searchForm = document.getElementById('searchForm'); // 検索フォーム
+
+  var chkList = searchForm.querySelectorAll('.searchCheckList input[type=checkbox]'); // checkboxのリスト
+  // 子チェックボックスがある場合は、親のチェック状態変化に合わせる
+
+  chkList.forEach(function (el) {
+    var parent = el.parentElement; // inputの親要素（li要素）
+
+    var childChkList = parent.querySelectorAll('.searchCheckList input[type=checkbox]'); // 子チェックボックスリスト
+
+    if (childChkList.length > 0) {
+      el.addEventListener('change', function (e) {
+        // 選択状態を取得し、子チェクボックスに値を反映
+        // また、チェック無しの場合は、disabel=trueとなるよう対応
+        var value = e.target.checked;
+        childChkList.forEach(function (child) {
+          if (child !== el) {
+            child.checked = value;
+            child.disabled = !value;
+          }
+        });
+      });
+    }
+  });
+}
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ })
