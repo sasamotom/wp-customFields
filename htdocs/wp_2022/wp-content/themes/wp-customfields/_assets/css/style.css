@@ -1048,7 +1048,7 @@ a .courseDtl:hover .courseDtl_name {
   }
   .searchForm input[type=checkbox] + label,
   .searchForm input[type=radio] + label {
-    margin-left: 0.5em;
+    padding-left: 0.5em;
     cursor: pointer
   }
   .searchForm input[type=checkbox]:not(.switch) {
@@ -1087,6 +1087,36 @@ body.s-main.p-search {
 }
 .sec-searchItem + .sec-searchItem {
   padding-top: 0
+}
+.sec-searchResult .resultCnt {
+  font-size: 150%
+}
+.sec-searchResult .resultList {
+  margin-top: 3rem;
+  border-top: 1px solid #d3f597
+}
+.sec-searchResult .resultList > li {
+  padding: 1em 0;
+  border-bottom: 1px solid #d3f597
+}
+.sec-searchResult .resultList a:hover {
+  opacity: 0.7
+}
+.sec-searchResult .resultList_date time {
+  font-size: 1.2rem
+}
+.sec-searchResult .resultList_date span {
+  display: inline-block;
+  margin-left: 1em;
+  padding: 0 0.5em;
+  font-size: 1.1rem;
+  background: #d3f597
+}
+.sec-searchResult .resultList_ttl {
+  font-size: 110%
+}
+.sec-searchResult .resultList_txt {
+  font-size: 90%
 }
 .header {
   position: fixed;

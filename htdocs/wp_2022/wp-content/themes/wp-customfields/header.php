@@ -54,8 +54,8 @@
     )); ?>
   </nav>
 </header>
-<?php else: ?>
-<!-- /配下のサイト -->
+<?php elseif (!is_search()): ?>
+<!-- /配下のサイト（検索以外） -->
 <header class="header">
   <div class="titleLogo">
     <a href="/"><img src="<?php echo home_url(); ?>/wp_2022/wp-content/uploads/logo.svg" alt="WP CustomFields" width="102" height="62" /></a>

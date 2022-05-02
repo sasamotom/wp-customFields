@@ -214,7 +214,7 @@ $colorSearch: #d3f597;
         }
       }
       & + label {
-        margin-left: .5em;
+        padding-left: .5em;
         cursor: pointer;
       }
     }
@@ -252,3 +252,39 @@ body.s-main.p-search {
   padding-top: 0;
 }
 
+.sec-searchResult {
+  .resultCnt {
+    font-size: 150%;
+  }
+  .resultList {
+    margin-top: 3rem;
+    border-top: 1px solid $colorSearch;
+    > li {
+      padding: 1em 0;
+      border-bottom: 1px solid $colorSearch;
+    }
+    a {
+      &:hover {
+        opacity: .7;
+      }
+    }
+    &_date {
+      time {
+        font-size: 1.2rem;
+      }
+      span {
+        display: inline-block;
+        margin-left: 1em;
+        padding: 0 0.5em;
+        font-size: 1.1rem;
+        background: $colorSearch;
+      }
+    }
+    &_ttl {
+      font-size: 110%;
+    }
+    &_txt {
+      font-size: 90%;
+    }
+  }
+}

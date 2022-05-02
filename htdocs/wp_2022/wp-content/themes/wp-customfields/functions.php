@@ -281,6 +281,9 @@ function pagename_class($classes) {
   elseif (is_front_page()) {
     $classes[] = 'p-front-page';
   }
+  elseif (is_search()) {
+    $classes[] = 'p-search';
+  }
   elseif (is_404()) {
     $classes[] = 'p-404';
   }
@@ -690,6 +693,10 @@ add_filter( 'mwform_custom_mail_tag', 'send_date_time', 10, 3 );
 // 戻値： true サブサイトである　 / false サブサイトではない
 // --------------------------------------------------------------
 function check_sub_site($directory_name) {
+  // 検索画面の場合はサブディレクトリではない
+  if (is_search()) {
+    return false;
+  }
   // URLの最初がサブサイトのディレクトリ名かどうかをチェックする
   $this_page = str_replace(home_url(), '', get_the_permalink());
   if (strpos($this_page, '/'.$directory_name) === 0) {
@@ -711,6 +718,217 @@ function my_enqueue() {
 }
 add_action( 'wp_enqueue_scripts', 'my_enqueue' );
 
+// --------------------------------------------------------------
+// 検索設定（かなりエグめ。多分、他の人には調整できない）
+// --------------------------------------------------------------
+// JOIN
+function my_search_join($join) {
+  global $wpdb;
+
+  if( is_search() ) {
+    $join .= " LEFT JOIN wp_term_relationships
+      ON ({$wpdb->posts}.ID = wp_term_relationships.object_id) ";
+  }
+  return $join;
+}
+add_filter('posts_join', 'my_search_join');
+
+// GROUP BY
+function my_search_groupby($groupby) {
+  global $wpdb;
+
+  if( !is_search() ) {
+    return $groupby;
+  }
+
+  // 投稿IDでグルーピング
+  $mygroupby = "{$wpdb->posts}.ID";
+
+  // グルーピング済の場合は現状のグルーピングを返す
+  if( preg_match( "/$mygroupby/", $groupby )) {
+    return $groupby;
+  }
+
+  // グルーピングする項目が現状ない場合は、自作グルーピングを返す
+  if(!strlen(trim($groupby))) {
+    return $mygroupby;
+  }
+
+  // 既にグルーピングする項目がある場合は、','をつけて返す
+  return $groupby . ", " . $mygroupby;
+}
+add_filter('posts_groupby', 'my_search_groupby' );
+
+// WHERE
+function my_search($search, $query) {
+  // 検索ページ以外は変更しない
+  if (!$query->is_search) {
+    return;
+  }
+
+  global $wp_query;
+  // キーワードがなくても検索ページを表示させる
+  if (isset($wp_query->query['s'])) {
+    $wp_query->is_search = TRUE;
+  }
+
+  global $wpdb;
+  $search = '';   // 追加するクエリ条件式
+
+  // タクソノミーの条件追加
+  if(!empty($_REQUEST['tax'])) {
+    $taxArr = [];   // タクソノミーの配列
+    $termArr = [];  // termの配列
+    $pre_taxslug = "";
+    $pre_termArr = [];
+    foreach ($_REQUEST['tax'] as $t) {
+      // 取得した文字列から、タクソノミー配列＆term配列を作成する
+      $info = explode("^", $t);
+      if (count($info) === 2) {
+        $taxslug = $info[0];
+        $termid = $info[1];
+        // 最初or次のタクソノミーの時
+        if ($pre_taxslug !== $taxslug && $pre_taxslug !== '') {
+          // 直前の情報を保存
+          array_push($taxArr, $pre_taxslug);
+          array_push($termArr, $pre_termArr);
+          $pre_termArr = [];
+          array_push($pre_termArr, $termid);
+          $pre_taxslug = $taxslug;
+        }
+        else {
+          array_push($pre_termArr, $termid);
+          $pre_taxslug = $taxslug;
+        }
+      }
+    }
+    array_push($taxArr, $pre_taxslug);
+    array_push($termArr, $pre_termArr);
+
+    $terms = '';    // 指定されたターム
+    $taxs = '';     // 指定されたタクソノミー
+    for ($i = 0; $i < count($taxArr); $i++) {
+      if (!in_array('ALL', $termArr[$i])) {
+        // 「全て」では無い場合（絞り込む対象を取得）
+        foreach($termArr[$i] as $t) {
+          if ($terms !== '') {
+            $terms = $terms . ',';
+          }
+          $terms = $terms . $t;
+        }
+        if ($taxs !== '') {
+          $taxs = $taxs . ',';
+        }
+        $taxs = $taxs . "'" . $taxArr[$i] . "'";
+      }
+    }
+    if ($taxs !== '') {
+      $search.= " AND (
+        wp_term_relationships.term_taxonomy_id IN ({$terms})
+        OR NOT EXISTS (
+        SELECT 1
+        FROM wp_term_relationships
+        INNER JOIN wp_term_taxonomy
+        ON wp_term_taxonomy.term_taxonomy_id = wp_term_relationships.term_taxonomy_id
+        WHERE wp_term_taxonomy.taxonomy IN ({$taxs})
+        AND wp_term_relationships.object_id = wp_posts.ID)
+      ) ";
+    }
+  }
+
+  // カスタムフィールドの内容も検索結果に含める
+  $search_words = explode(' ', isset($wp_query->query_vars['s']) ? $wp_query->query_vars['s'] : '');
+  if (count($search_words) > 0) {
+    // $search .= "AND post_type = 'course'";     // post_typeを指定したい場合はここで条件追加
+    foreach ($search_words as $word) {
+      if (!empty($word)) {
+        $search_word = '%' . esc_sql($word) . '%';
+        $search .= " AND (
+          {$wpdb->posts}.post_title LIKE '{$search_word}'
+          OR {$wpdb->posts}.post_content LIKE '{$search_word}'
+          OR {$wpdb->posts}.ID IN (
+            SELECT distinct post_id
+            FROM {$wpdb->postmeta}
+            WHERE meta_value LIKE '{$search_word}'
+            )
+        ) ";
+      }
+    }
+  }
+
+  // 期間検索の条件式追加
+  if (!empty($_REQUEST['date_from']) && !empty($_REQUEST['date_to'])) {
+    $from = "'". date('Y-m-d',  strtotime($_REQUEST['date_from'])). "'";
+    $to   = "'". date('Y-m-d',  strtotime($_REQUEST['date_to'])). "'";
+    $search .= " AND DATE(post_date) BETWEEN $from AND $to";
+  }
+  return $search;
+}
+add_filter('posts_search','my_search', 10, 2);
+
+
+// --------------------------------------------------------------
+// 【検索】検索フィルターの追加
+// --------------------------------------------------------------
+function search_filter($query) {
+  if (!is_admin() && $query->is_main_query() && $query->is_search()) {
+    // post_type条件の追加
+    if(!empty($_REQUEST['post_type'])) {
+      $pt = $_REQUEST['post_type'];
+      array_push($pt, 'page');    // 固定ページも検索対象
+      $query->set('post_type', $pt);
+    }
+    // 固定ページ条件の追加（検索対象外固定ページを指定する）
+    // 固定ページ一覧を作成
+    $args = array(
+      'post_type' => 'page', //固定ページ
+      'posts_per_page' => -1 //これを入れないと固定ページ数分表示されない
+    );
+    $my_posts = get_posts($args);
+    $allpages = [];
+    if ($my_posts) {
+      global $post;
+      foreach($my_posts as $post) {
+        setup_postdata($post);
+        array_push($allpages, $post->ID);
+      }
+      wp_reset_postdata();
+    }
+    // 検索対象のページ一覧を作成
+    $ids = '';
+    if (!empty($_REQUEST['pages'])) {
+      foreach ($_REQUEST['pages'] as $pages) {
+        if ($ids !== '') {
+          $ids = $ids . ',';
+        }
+        $ids = $ids . $pages;
+      }
+    }
+    $showpages = explode(',',$ids);   // 検索対象に入れたい固定ページ
+    // 全ての固定ページと検索対象に入れたい固定ページから、削除したい対象から削除したい固定ページを求める
+    $hiddenpages = array_diff($allpages, $showpages);
+    if (count($hiddenpages) > 0) {
+      // 検索対象から削除したい固定ページのIDを登録
+      $query->set('post__not_in', $hiddenpages);
+    }
+
+    // 検索結果の１ページあたりの表示件数指定
+    $query->set('posts_per_page', -1);
+  }
+  return $query;
+}
+add_action( 'pre_get_posts','search_filter' );
+
+// --------------------------------------------------------------
+// 【検索】検索から除外するページを指定する
+// --------------------------------------------------------------
+// function search_filter($query) {
+//   if (!is_admin() && $query->is_main_query() && $query->is_search()) {
+//     $query->set('post__not_in', array(2, 30, 78));  // 除外したいページのpostIDを配列に入れる
+//   }
+//   return $query;
+// }
+// add_action( 'pre_get_posts','search_filter' );
 
 // ************************ カスタムフィールド **********************************************
 // --------------------------------------------------------------
