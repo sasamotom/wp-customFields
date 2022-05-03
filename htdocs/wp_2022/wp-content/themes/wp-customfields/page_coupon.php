@@ -70,6 +70,10 @@
 <?php
   endif;
 ?>
+<?php
+  // Instagramを表示
+  // get_template_part( 'template/content', 'instagram' );
+?>
     </div>
   </section>
 </main>

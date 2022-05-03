@@ -288,3 +288,18 @@
     transform: rotate(180deg);
   }
 }
+
+.instagramContainer {
+  margin-top: 5rem;
+  .picList {
+    display: flex;
+    > li {
+      position: relative;
+      width: 25%;
+      img {
+        aspect-ratio: 1;
+        object-fit: cover;
+      }
+    }
+  }
+}
